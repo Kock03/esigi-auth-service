@@ -26,14 +26,14 @@ export class UsersEntity {
   @Column()
   password: String;
 
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: String;
+  @CreateDateColumn({ name: 'created_at', type: 'datetime' })
+  createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: String;
+  @UpdateDateColumn({ name: 'updated_at', type: 'datetime' })
+  updatedAt: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at' })
-  deletedAt: String;
+  @DeleteDateColumn({ name: 'deleted_at', type: 'datetime' })
+  deletedAt: Date;
 
   @BeforeInsert()
   hasPassword() {

@@ -6,8 +6,11 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { hashSync } from 'bcrypt';
+import { ProfilesEntity } from '../profiles/profiles.entity';
 
 @Entity({ name: 'users' })
 export class UsersEntity {
@@ -39,4 +42,11 @@ export class UsersEntity {
   hasPassword() {
     this.password = hashSync(this.password, 10);
   }
+
+  @ManyToMany((type) => ProfilesEntity, (profile) => profile.user, { cascade: ['insert', 'soft-remove'], eager: true })
+  @JoinTable({
+    name: 'profile_user_profile',
+    joinColumn: { name: 'id' },
+    inverseJoinColumn: { name: 'profile_id' }})
+  profile: ProfilesEntity[];
 }

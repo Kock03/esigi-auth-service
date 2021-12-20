@@ -3,6 +3,8 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -26,6 +28,6 @@ export class ProfilesEntity {
   @DeleteDateColumn({ name: 'deleted_at', type: 'datetime' })
   deletedAt: Date;
 
-  @ManyToMany(() => UsersEntity, (user) => user.profile, { cascade: ['insert']})
+  @ManyToMany(() => UsersEntity, (user) => user.profile, { cascade: ['insert']} )
   user: UsersEntity[];
 }

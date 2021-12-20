@@ -44,4 +44,5 @@ export class ProfilesService {
     await this.profilesRepository.findOneOrFail({ id });
     this.profilesRepository.softDelete({ id });
   }
+  
 }

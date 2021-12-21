@@ -43,10 +43,14 @@ export class UsersEntity {
     this.password = hashSync(this.password, 10);
   }
 
-  @ManyToMany((type) => ProfilesEntity, (profile) => profile.user, { cascade: ['insert', 'soft-remove'], eager: true })
+  @ManyToMany((type) => ProfilesEntity, (profile) => profile.user, {
+    cascade: ['insert', 'soft-remove'],
+    eager: true,
+  })
   @JoinTable({
     name: 'profile_user_profile',
     joinColumn: { name: 'id' },
-    inverseJoinColumn: { name: 'profile_id' }})
+    inverseJoinColumn: { name: 'profile_id' },
+  })
   profile: ProfilesEntity[];
 }

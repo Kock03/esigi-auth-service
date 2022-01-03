@@ -1,12 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { profile } from 'console';
-import {
-  createQueryBuilder,
-  FindConditions,
-  FindOneOptions,
-  Repository,
-} from 'typeorm';
+import { FindConditions, FindOneOptions, Repository } from 'typeorm';
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
 import { ProfilesEntity } from './profiles.entity';
@@ -19,14 +13,10 @@ export class ProfilesService {
   ) {}
 
   async findAll() {
-    // return await this.profilesRepository.find({
-    //   select: ['id', 'name', 'user'],
-    // });
-
-    const profilesWithUsers = await this.profilesRepository 
-    .createQueryBuilder("profiles")
-    .leftJoinAndSelect("profiles.user", "user")
-    .getMany();
+    const profilesWithUsers = await this.profilesRepository
+      .createQueryBuilder('profiles')
+      .leftJoinAndSelect('profiles.user', 'user')
+      .getMany();
 
     return profilesWithUsers;
   }

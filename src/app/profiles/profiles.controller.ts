@@ -17,7 +17,7 @@ import { UpdateProfileDto } from './dto/update-profile.dto';
 import { ProfilesService } from './profiles.service';
 
 @Controller('api/v1/profiles')
-@UseGuards(AuthGuard('jwt'))
+// @UseGuards(AuthGuard('jwt'))
 export class ProfilesController {
   constructor(private readonly profilesService: ProfilesService) {}
 

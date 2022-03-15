@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { AppService } from './app.service';
 import { ProfilesModule } from './app/profiles/profiles.module';
+import { RoleModule } from './app/roles/roles.module';
 import { UsersModule } from './app/users/users.module';
 import { AuthModule } from './auth/auth.module';
 
@@ -21,7 +22,8 @@ import { AuthModule } from './auth/auth.module';
     } as TypeOrmModuleOptions),
     UsersModule,
     AuthModule,
-    ProfilesModule
+    ProfilesModule,
+    RoleModule,
   ],
   controllers: [],
   providers: [AppService],

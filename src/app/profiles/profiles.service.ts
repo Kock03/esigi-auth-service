@@ -18,6 +18,11 @@ export class ProfilesService {
       .leftJoinAndSelect('profiles.user', 'user')
       .getMany();
 
+      const profilesWithRoles = await this.profilesRepository
+      .createQueryBuilder('profiles')
+      .leftJoinAndSelect('profiles.role', 'role')
+      .getMany();
+
     return profilesWithUsers;
   }
 

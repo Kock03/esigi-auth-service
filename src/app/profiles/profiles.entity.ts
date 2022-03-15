@@ -3,11 +3,14 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   ManyToMany,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { RoleEntity } from '../roles/role.entity';
 import { UsersEntity } from '../users/users.entity';
 
 @Entity({ name: 'profiles' })
@@ -31,4 +34,13 @@ export class ProfilesEntity {
     cascade: ['insert'],
   })
   user: UsersEntity[];
+
+  
+  @OneToOne(() => RoleEntity, {
+    cascade: ['insert', 'update', 'remove'],
+    orphanedRowAction: 'delete',
+    eager: true,
+  })
+  @JoinColumn()
+  role: RoleEntity;
 }

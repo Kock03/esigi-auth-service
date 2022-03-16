@@ -15,14 +15,8 @@ export class ProfilesService {
   async findAll() {
     const profilesWithUsers = await this.profilesRepository
       .createQueryBuilder('profiles')
-      .leftJoinAndSelect('profiles.user', 'user')
-      .getMany();
-
-      const profilesWithRoles = await this.profilesRepository
-      .createQueryBuilder('profiles')
       .leftJoinAndSelect('profiles.role', 'role')
       .getMany();
-
     return profilesWithUsers;
   }
 

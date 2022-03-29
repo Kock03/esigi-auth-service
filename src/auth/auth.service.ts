@@ -1,6 +1,6 @@
 import { UsersEntity } from './../app/users/users.entity';
 import { UsersService } from './../app/users/users.service';
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { compareSync } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
@@ -32,5 +32,20 @@ export class AuthService {
       token: this.jwtService.sign(payload),
       profiles: user.profile 
     };
+  }
+  
+  decodeToken(jwt: any) {
+    this.verifyToken(jwt);
+    const user = this.jwtService.decode(jwt)['user'];
+    if (user) {
+      return user;
+    }
+  }
+
+  verifyToken(jwt: any) {
+    const verify = this.jwtService.verify(jwt);
+    if (verify) {
+      return true;
+    } 
   }
 }

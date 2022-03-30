@@ -16,7 +16,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { Roles } from '../roles/roles.decorator';
 import { RolesGuard } from '../roles/role.guard';
 
 @Controller('api/v1/users')

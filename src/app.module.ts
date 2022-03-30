@@ -3,12 +3,12 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { AppService } from './app.service';
 import { ProfilesModule } from './app/profiles/profiles.module';
-import { RoleModule } from './app/roles/roles.module';
 import { UsersModule } from './app/users/users.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
+    AuthModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: process.env.TYPEORM_CONNECTION,
@@ -21,9 +21,7 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true,
     } as TypeOrmModuleOptions),
     UsersModule,
-    AuthModule,
     ProfilesModule,
-    RoleModule,
   ],
   controllers: [],
   providers: [AppService],

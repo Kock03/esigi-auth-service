@@ -1,6 +1,6 @@
 import { UsersEntity } from './../app/users/users.entity';
 import { UsersService } from './../app/users/users.service';
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { compareSync } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
@@ -26,20 +26,17 @@ export class AuthService {
   }
 
   async login(user: UsersEntity) {
-    const payload = { sud: user.id, email: user.email };
-
+    const payload = {
+      sud: user.id,
+      email: user.email,
+      roles: user.profile.map((profile) => {
+        return profile.role.name;
+      }),
+    };
     return {
       token: this.jwtService.sign(payload),
-      profiles: user.profile 
+      profiles: user.profile,
     };
-  }
-  
-  decodeToken(jwt: any) {
-    this.verifyToken(jwt);
-    const user = this.jwtService.decode(jwt)['user'];
-    if (user) {
-      return user;
-    }
   }
 
   verifyToken(jwt: any) {

@@ -1,1 +1,33 @@
-<p>auth-service-register works!</p>
+<div id="collaboratorRegisterProfile" class="tab">
+    <div fxLayout="row" fxLayoutAlign="start center">
+        <button mat-button class="btn-arrow-back" color="primary">
+            <mat-icon>chevron_left</mat-icon>
+        </button>
+        <h2 class="title">Colaboradores</h2>
+    </div>
+    <div class="content-scroll" *ngIf="collaboratorProfileForm">
+        <form (submit)="next()" [formGroup]="collaboratorProfileForm" fxLayout="column">
+            <div fxFlex="100" fxLayoutGap="16px" fxFlexAlign="end">
+                <mat-form-field fxFlex="35" appearance="outline">
+                    <mat-label>Nome</mat-label>
+                    <input matInput placeholder="Cargo" formControlName="office" />
+                </mat-form-field>
+
+                <mat-form-field fxFlex="30" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput mask="00/00/0000" formControlName="admissionDate" placeholder="Data Admissão" />
+                </mat-form-field>
+
+                <mat-form-field fxFlex="20" appearance="outline">
+                    <mat-label>DDD</mat-label>
+                    <input matInput mask="00/00/0000" formControlName="ddd" placeholder="Data Admissão" />
+                </mat-form-field>
+
+                <mat-form-field fxFlex="15" appearance="outline">
+                    <mat-label>Telefone</mat-label>
+                    <input matInput formControlName="phoneNumber" placeholder="Data Admissão" />
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+</div>

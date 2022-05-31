@@ -5,21 +5,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthServiceListComponent } from './auth-service-list/auth-service-list.component';
 
 const routes: Routes = [
- {
-   path: '/lista', 
-   component: AuthServiceListComponent
- }
-]
-
+  {
+    path: '/lista',
+    component: AuthServiceListComponent,
+  },
+];
 
 @NgModule({
-  declarations: [
-    AuthServiceCreateComponent,
-    AuthServiceListComponent
-  ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-  ]
+  declarations: [AuthServiceCreateComponent, AuthServiceListComponent],
+  imports: [CommonModule, RouterModule.forChild(routes)],
+  entryComponents: [AuthServiceListComponent],
 })
-export class AuthServiceModule { }
+export class AuthServiceModule {}

@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatToolbarModule} from '@angular/material/toolbar'; 
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { LayoutModule } from '@angular/cdk/layout';
@@ -28,14 +27,8 @@ import { AuthServiceCreateComponent } from './modules/auth-service/auth-service-
 import { AuthServiceListComponent } from './modules/auth-service/auth-service-create/auth-service-list/auth-service-list.component';
 import { CommonModule } from '@angular/common';
 
-
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    AuthServiceCreateComponent,
-    AuthServiceListComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     CommonModule,
     BrowserModule,
@@ -64,13 +57,11 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     MatInputModule,
     MatTableModule,
-    
-
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
 
 export function translateFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);

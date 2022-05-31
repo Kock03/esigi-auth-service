@@ -1,1 +1,77 @@
-<p>auth-service-list works!</p>
+<div id="collaboratorListProfile" class="page">
+    <h2>Cadastro de Perfis</h2>
+
+    <div fxLayoutAlign="space-between">
+        <form class="search" fxLayout="row" fxLayoutGap="16px">
+            <mat-form-field appearance="outline" fxFlex="80">
+                <mat-label>Buscar colaboradores</mat-label>
+                <input matInput type="text" #filter />
+                <mat-icon matSuffix style="cursor: pointer">search</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field fxFlex="20" appearance="outline">
+                <mat-label>Filtro</mat-label>
+                <mat-select matInput disableRipple>
+                    <mat-option [value]="1">Todos</mat-option>
+                    <mat-option [value]="2">Ativos</mat-option>
+                    <mat-option [value]="3">Inativos</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+    </div>
+
+    <div class="envolti-table mat-elevation-z8" fxLayout="column">
+        <table mat-table [dataSource]="filteredCollaboratorList">
+            <ng-container matColumnDef="collaborator">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by collaborator">
+                    aaaaaa
+                </th>
+                <td mat-cell *matCellDef="let collaborator">
+                    {{ collaborator.firstNameCorporateName }}
+                    {{ collaborator.lastNameFantasyName }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="admissionDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by admissionDate">
+                    aaaaa
+                </th>
+                <td mat-cell *matCellDef="let collaborator">
+                    {{ collaborator.admissionDate | date: "dd/MM/yyyy" }}
+                </td>
+            </ng-container>
+
+
+
+
+
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status">
+                    aaaaa
+                </th>
+                <td mat-cell *matCellDef="let collaborator">
+                    {{ collaborator.active == true ? "Ativo" : "Inativo" }}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="icon">
+                <th mat-header-cell *matHeaderCellDef clas="icon-add" style="text-align: end">
+                    <button class="edit-button" mat-flat-button color="primary" (click)="createCollaborator()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </th>
+                <td class="button-tab" mat-cell *matCellDef="let collaborator" style="text-align: end">
+                    <button class="table-button" mat-button>
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button class="table-button" mat-button>
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedCollaborator; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedCollaborator"></tr>
+        </table>
+    </div>
+</div>

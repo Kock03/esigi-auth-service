@@ -26,6 +26,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthServiceCreateComponent } from './modules/auth-service/auth-service-create/auth-service-create.component';
 import { AuthServiceListComponent } from './modules/auth-service/auth-service-create/auth-service-list/auth-service-list.component';
 import { CommonModule } from '@angular/common';
+import { AuthServiceRegisterComponent } from './modules/auth-service/auth-service-create/auth-service-register/auth-service-register.component';
 
 @NgModule({
   declarations: [AppComponent],

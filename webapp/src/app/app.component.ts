@@ -24,22 +24,10 @@ export class AppComponent {
       action: 'home',
     },
     {
-      name: 'Segurança Módulos',
-      icon: 'view_module',
-      selected: false,
-      action: 'modulos',
-    },
-    {
-      name: 'Segurança Telas',
-      icon: 'preview',
-      selected: false,
-      action: 'telas',
-    },
-    {
-      name: 'Segurança Perfis',
+      name: 'Perfil',
       icon: 'person',
       selected: false,
-      action: 'perfis',
+      action: 'autorizacao/lista',
     },
   ];
 

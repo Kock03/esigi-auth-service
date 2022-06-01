@@ -13,6 +13,16 @@
       "active": "Ativos"
     },
     "user": "Usuário",
-    "permissions": "Permissões"
+    "permissions": "Permissões",
+    "edit": "Editar",
+    "collaborators": "Colaboradores",
+    "name": "Nome",
+    "email": "Email",
+    "ddd": "DDD",
+    "phone_number": "Telefone",
+    "profile": "Perfil",
+    "login": "login",
+    "password": "Senha",
+    "button_save": "Salvar"
   }
 }

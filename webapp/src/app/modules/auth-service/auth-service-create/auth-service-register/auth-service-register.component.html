@@ -4,32 +4,32 @@
             (click)="listCollaborator()">
             <mat-icon>chevron_left</mat-icon>
         </button>
-        <h2 class="title">Colaboradores</h2>
+        <h2 class="title">{{"auth-service-list.collaborators" | translate}}</h2>
     </div>
     <div class="content-scroll" *ngIf="collaboratorProfileForm">
         <form (submit)="next()" [formGroup]="collaboratorProfileForm"
             fxLayout="column" class="form-control">
             <div fxFlex="100" fxLayoutGap="16px">
                 <mat-form-field fxFlex="35" appearance="outline">
-                    <mat-label>Nome</mat-label>
+                    <mat-label>{{"auth-service-list.name" | translate}}</mat-label>
                     <input matInput placeholder="Cargo" formControlName="name"
                         />
                 </mat-form-field>
 
                 <mat-form-field fxFlex="30" appearance="outline">
-                    <mat-label>Email</mat-label>
+                    <mat-label>{{"auth-service-list.email" | translate}}</mat-label>
                     <input matInput
                         formControlName="email" placeholder="Email" />
                 </mat-form-field>
 
                 <mat-form-field fxFlex="20" appearance="outline">
-                    <mat-label>DDD</mat-label>
+                    <mat-label>{{"auth-service-list.ddd" | translate}}</mat-label>
                     <input matInput mask="(00)" formControlName="ddd"
                         placeholder="DDD" />
                 </mat-form-field>
 
                 <mat-form-field fxFlex="15" appearance="outline">
-                    <mat-label>Telefone</mat-label>
+                    <mat-label>{{"auth-service-list.phone_number" | translate}}</mat-label>
                     <input matInput formControlName="phoneNumber"
                         placeholder="Telefone" mask="0000-0000||00000-0000" />
                 </mat-form-field>
@@ -37,7 +37,7 @@
 
             <div fxFlex="100" fxLayoutGap="16px">
                 <mat-form-field fxFlex="35" appearance="outline">
-                    <mat-label>Perfil</mat-label>
+                    <mat-label>{{"auth-service-list.profile" | translate}}</mat-label>
                     <mat-select matInput formControlName="profile">
                         <mat-option [value]="1">Diretor Tecnologia</mat-option>
                         <mat-option [value]="2">Diretor Comercial</mat-option>
@@ -49,13 +49,13 @@
                 </mat-form-field>
 
                 <mat-form-field fxFlex="35" appearance="outline">
-                    <mat-label>Login</mat-label>
+                    <mat-label>{{"auth-service-list.login" | translate}}</mat-label>
                     <input matInput formControlName="login"
                         placeholder="Login" />
                 </mat-form-field>
 
                 <mat-form-field fxFlex="30" appearance="outline">
-                    <mat-label>Senha</mat-label>
+                    <mat-label>{{"auth-service-list.password" | translate}}</mat-label>
                     <input matInput mask="00/00/0000" formControlName="password"
                         placeholder="Senha" type="password" />
                 </mat-form-field>
@@ -64,6 +64,6 @@
     </div>
     <div class="navigation-buttons" fxLayoutAlign="center end"
         fxLayoutGap="16px">
-        <button mat-flat-button color="primary">Salvar</button>
+        <button mat-flat-button color="primary">{{"auth-service-list.button_save" | translate}}</button>
     </div>
 </div>

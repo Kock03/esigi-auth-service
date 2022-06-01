@@ -14,24 +14,44 @@
                     <mat-label>{{"auth-service-list.name" | translate}}</mat-label>
                     <input matInput placeholder="Cargo" formControlName="name"
                         />
+                    <mat-error *ngIf="collaboratorProfileForm &&
+                        collaboratorProfileForm.controls['name'].hasError('required')">
+                        {{'validators.validator-required' | translate}}
+                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field fxFlex="30" appearance="outline">
                     <mat-label>{{"auth-service-list.email" | translate}}</mat-label>
                     <input matInput
                         formControlName="email" placeholder="Email" />
+                    <mat-error *ngIf="collaboratorProfileForm &&
+                        collaboratorProfileForm.controls['email'].hasError('required')">
+                        {{'validators.validator-required' | translate}}
+                    </mat-error>
+                    <mat-error *ngIf="collaboratorProfileForm &&
+                        collaboratorProfileForm.controls['email'].hasError('email')">
+                        {{'validators.validator-email' | translate}}
+                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field fxFlex="20" appearance="outline">
                     <mat-label>{{"auth-service-list.ddd" | translate}}</mat-label>
                     <input matInput mask="(00)" formControlName="ddd"
                         placeholder="DDD" />
+                        <mat-error *ngIf="collaboratorProfileForm &&
+                        collaboratorProfileForm.controls['ddd'].hasError('required')">
+                        {{'validators.validator-required' | translate}}
+                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field fxFlex="15" appearance="outline">
                     <mat-label>{{"auth-service-list.phone_number" | translate}}</mat-label>
                     <input matInput formControlName="phoneNumber"
                         placeholder="Telefone" mask="0000-0000||00000-0000" />
+                        <mat-error *ngIf="collaboratorProfileForm &&
+                        collaboratorProfileForm.controls['phoneNumber'].hasError('required')">
+                        {{'validators.validator-required' | translate}}
+                    </mat-error>
                 </mat-form-field>
             </div>
 
@@ -46,24 +66,37 @@
                         <mat-option [value]="5">Coordenador RH</mat-option>
                         <mat-option [value]="6">Coordenador AMS</mat-option>
                     </mat-select>
+                    <mat-error *ngIf="collaboratorProfileForm &&
+                        collaboratorProfileForm.controls['profile'].hasError('required')">
+                        {{'validators.validator-required' | translate}}
+                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field fxFlex="35" appearance="outline">
                     <mat-label>{{"auth-service-list.login" | translate}}</mat-label>
                     <input matInput formControlName="login"
                         placeholder="Login" />
+                        <mat-error *ngIf="collaboratorProfileForm &&
+                        collaboratorProfileForm.controls['login'].hasError('required')">
+                        {{'validators.validator-required' | translate}}
+                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field fxFlex="30" appearance="outline">
                     <mat-label>{{"auth-service-list.password" | translate}}</mat-label>
                     <input matInput mask="00/00/0000" formControlName="password"
                         placeholder="Senha" type="password" />
+                        <mat-error *ngIf="collaboratorProfileForm &&
+                        collaboratorProfileForm.controls['password'].hasError('required')">
+                        {{'validators.validator-required' | translate}}
+                    </mat-error>
                 </mat-form-field>
             </div>
         </form>
     </div>
     <div class="navigation-buttons" fxLayoutAlign="center end"
         fxLayoutGap="16px">
-        <button mat-flat-button color="primary">{{"auth-service-list.button_save" | translate}}</button>
+        <button mat-flat-button color="primary">{{"auth-service-list.button_save"
+            | translate}}</button>
     </div>
 </div>

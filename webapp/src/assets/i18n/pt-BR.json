@@ -4,7 +4,7 @@
     "logout_span": "Logout"
   },
   "auth-service-list": {
-    "profile": "Cadastro de Perfil",
+    "profiles": "Cadastro de Perfil",
     "search_collaborators": "Buscar Colaboradores",
     "filter": {
       "name": "Filtro",
@@ -21,8 +21,12 @@
     "ddd": "DDD",
     "phone_number": "Telefone",
     "profile": "Perfil",
-    "login": "login",
+    "login": "Login",
     "password": "Senha",
     "button_save": "Salvar"
+  },
+  "validators": {
+    "validator-required": "Campo Obrigatório",
+    "validator-email": "Email inválido"
   }
 }

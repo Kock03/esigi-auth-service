@@ -1,13 +1,13 @@
-<div id="collaboratorRegisterProfile" class="tab">
+<div id="collaboratorRegisterProfile" class="page" fxLayout="column">
     <div fxLayout="row" fxLayoutAlign="start center">
-        <button mat-button class="btn-arrow-back" color="primary">
+        <button mat-button class="btn-arrow-back" color="primary" (click)="listCollaborator()">
             <mat-icon>chevron_left</mat-icon>
         </button>
         <h2 class="title">Colaboradores</h2>
     </div>
     <div class="content-scroll" *ngIf="collaboratorProfileForm">
-        <form (submit)="next()" [formGroup]="collaboratorProfileForm" fxLayout="column">
-            <div fxFlex="100" fxLayoutGap="16px" fxFlexAlign="end">
+        <form (submit)="next()" [formGroup]="collaboratorProfileForm" fxLayout="column" class="form-control">
+            <div fxFlex="100" fxLayoutGap="16px">
                 <mat-form-field fxFlex="35" appearance="outline">
                     <mat-label>Nome</mat-label>
                     <input matInput placeholder="Cargo" formControlName="office" />
@@ -28,6 +28,26 @@
                     <input matInput formControlName="phoneNumber" placeholder="Data Admissão" />
                 </mat-form-field>
             </div>
+
+            <div fxFlex="100" fxLayoutGap="16px">
+                <mat-form-field fxFlex="35" appearance="outline">
+                    <mat-label>Perfil</mat-label>
+                    <input matInput placeholder="Cargo" formControlName="profile" />
+                </mat-form-field>
+
+                <mat-form-field fxFlex="35" appearance="outline">
+                    <mat-label>Login</mat-label>
+                    <input matInput mask="00/00/0000" formControlName="login" placeholder="Login" />
+                </mat-form-field>
+
+                <mat-form-field fxFlex="30" appearance="outline">
+                    <mat-label>Senha</mat-label>
+                    <input matInput mask="00/00/0000" formControlName="password" placeholder="Senha" type="password" />
+                </mat-form-field>
+            </div>
         </form>
+    </div>
+    <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
+        <button mat-flat-button color="primary">Salvar</button>
     </div>
 </div>

@@ -1,9 +1,17 @@
-#collaboratorRegisterProfile{
+#collaboratorRegisterProfile {
     max-width: 1200px;
     width: 100%;
     padding-bottom: 10px;
 
     .title {
         margin: 0 !important;
-    }    
+    }
+
+    .form-control {
+        margin-top: 30px !important;
+    }
+
+    .navigation-buttons {
+        margin-top: 600px !important;
+    }
 }

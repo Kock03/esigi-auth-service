@@ -12,6 +12,8 @@ export class AuthServiceRegisterComponent implements OnInit {
   @Input('form') collaboratorProfileForm!: FormGroup;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
 
+  show: boolean = false
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -20,6 +22,10 @@ export class AuthServiceRegisterComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
   }
+
+  password() {
+    this.show = !this.show;
+}
 
   listCollaborator() {
     this.router.navigate(['autorizacao/lista']);

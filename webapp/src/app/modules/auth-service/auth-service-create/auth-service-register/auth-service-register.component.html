@@ -84,8 +84,9 @@
 
                 <mat-form-field fxFlex="30" appearance="outline">
                     <mat-label>{{"auth-service-list.password" | translate}}</mat-label>
-                    <input matInput mask="00/00/0000" formControlName="password"
-                        placeholder="Senha" type="password" />
+                    <input matInput formControlName="password"
+                        placeholder="Senha" [type]="show ? 'text' : 'password'" />
+                        <mat-icon (click)="password()">visibility_off{{show ? 'Show' : 'Hide'}}</mat-icon>
                         <mat-error *ngIf="collaboratorProfileForm &&
                         collaboratorProfileForm.controls['password'].hasError('required')">
                         {{'validators.validator-required' | translate}}

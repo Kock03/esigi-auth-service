@@ -28,9 +28,8 @@ export class AuthServiceRegisterComponent implements OnInit {
 
   initForm() {
     this.collaboratorProfileForm = this.fb.group({
-      office: [null, Validators.required],
-      admissionDate: [null, Validators.required],
-      active: [null, Validators.required],
+      name: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
       ddd: [null, Validators.required],
       phoneNumber: [null, Validators.required],
       profile: [null, Validators.required],

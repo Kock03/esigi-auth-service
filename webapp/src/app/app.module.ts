@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 // import { IConfig, NgxMaskModule } from 'ngx-mask';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -31,6 +32,7 @@ import { AuthServiceRegisterComponent } from './modules/auth-service/auth-servic
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    NgxMaskModule.forRoot(),
     CommonModule,
     BrowserModule,
     AppRoutingModule,

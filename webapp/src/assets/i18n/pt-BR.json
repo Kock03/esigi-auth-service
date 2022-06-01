@@ -1,6 +1,18 @@
 {
-    "app_component": {
-        "function": "Function",
-        "logout_span": "Logout"
-      }
+  "app_component": {
+    "function": "Function",
+    "logout_span": "Logout"
+  },
+  "auth-service-list": {
+    "profile": "Cadastro de Perfil",
+    "search_collaborators": "Buscar Colaboradores",
+    "filter": {
+      "name": "Filtro",
+      "all": "Todos",
+      "inactive": "Inativos",
+      "active": "Ativos"
+    },
+    "user": "Usuário",
+    "permissions": "Permissões"
+  }
 }

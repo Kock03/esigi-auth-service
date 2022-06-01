@@ -12,6 +12,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthServiceRegisterComponent } from './auth-service-register/auth-service-register.component';
+import { NgxMaskModule } from 'ngx-mask';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -33,6 +35,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    TranslateModule.forChild(),
     FlexLayoutModule,
     ReactiveFormsModule,
     MatSelectModule,
@@ -41,6 +44,7 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    NgxMaskModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [AuthServiceListComponent, AuthServiceRegisterComponent],

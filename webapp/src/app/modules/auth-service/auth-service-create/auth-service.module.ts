@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AuthServiceRegisterComponent } from './auth-service-register/auth-service-register.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { TranslateModule } from '@ngx-translate/core';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 const routes: Routes = [
   {
@@ -45,6 +46,7 @@ const routes: Routes = [
     MatInputModule,
     MatIconModule,
     NgxMaskModule,
+    MatAutocompleteModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [AuthServiceListComponent, AuthServiceRegisterComponent],

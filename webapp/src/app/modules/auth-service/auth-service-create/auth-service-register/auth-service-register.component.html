@@ -1,68 +1,100 @@
 <div id="collaboratorRegisterProfile" class="page" fxLayout="column">
     <div class="back" fxLayout="row" fxLayoutAlign="start center">
-        <button mat-button class="btn-arrow-back" color="primary"
+        <button
+            mat-button
+            class="btn-arrow-back"
+            color="primary"
             (click)="listCollaborator()">
             <mat-icon>chevron_left</mat-icon>
         </button>
-        <h2 class="title">{{"auth-service-list.collaborators" | translate}}</h2>
+        <h2 class="title">{{ "auth-service-list.collaborators" | translate }}</h2>
     </div>
     <div class="content-scroll" *ngIf="collaboratorProfileForm">
-        <form (submit)="next()" [formGroup]="collaboratorProfileForm"
-            fxLayout="column" class="form-control">
+        <form
+            (submit)="next()"
+            [formGroup]="collaboratorProfileForm"
+            fxLayout="column"
+            class="form-control">
             <div fxFlex="100" fxLayoutGap="16px">
-                <mat-form-field fxFlex="50" appearance="outline">
+                <mat-form-field
+                    fxFlex="34"
+                    class="example-full-width"
+                    appearance="outline">
                     <mat-label>{{"auth-service-list.name" | translate}}</mat-label>
-                    <input matInput placeholder="Cargo" formControlName="name"
+                    <input
+                        type="text"
+                        placeholder="Colaborador"
+                        aria-label="text"
+                        #filter
+                        matInput
+                        [matAutocomplete]="auto"
+                        [formControl]="collaboratorControl"
                         />
-                    <mat-error *ngIf="collaboratorProfileForm &&
-                        collaboratorProfileForm.controls['name'].hasError('required')">
-                        {{'validators.validator-required' | translate}}
-                    </mat-error>
+                    <mat-autocomplete
+                        autoActiveFirstOption
+                        #auto="matAutocomplete"
+                        [displayWith]="displayFn">
+                        <mat-option
+                            *ngFor="let collaborator of filteredCollaborators"
+                            [value]="collaborator">
+                            {{ collaborator.firstNameCorporateName }}
+                            {{ collaborator.lastNameFantasyName }}
+                        </mat-option>
+                    </mat-autocomplete>
                 </mat-form-field>
 
                 <mat-form-field fxFlex="50" appearance="outline">
-                    <mat-label>{{"auth-service-list.email" | translate}}</mat-label>
-                    <input matInput
-                        formControlName="email" placeholder="Email" />
-                    <mat-error *ngIf="collaboratorProfileForm &&
+                    <mat-label>{{ "auth-service-list.email" | translate }}</mat-label>
+                    <input matInput formControlName="email" placeholder="Email"
+                        />
+                    <mat-error
+                        *ngIf="collaboratorProfileForm &&
                         collaboratorProfileForm.controls['email'].hasError('required')">
-                        {{'validators.validator-required' | translate}}
+                        {{ "validators.validator-required" | translate }}
                     </mat-error>
-                    <mat-error *ngIf="collaboratorProfileForm &&
+                    <mat-error
+                        *ngIf="collaboratorProfileForm &&
                         collaboratorProfileForm.controls['email'].hasError('email')">
-                        {{'validators.validator-email' | translate}}
+                        {{ "validators.validator-email" | translate }}
                     </mat-error>
                 </mat-form-field>
-
-
             </div>
 
             <div fxFlex="100" fxLayoutGap="16px">
                 <mat-form-field fxFlex="30" appearance="outline">
-                    <mat-label>{{"auth-service-list.ddd" | translate}}</mat-label>
+                    <mat-label>{{ "auth-service-list.ddd" | translate }}</mat-label>
                     <input matInput mask="(00)" formControlName="ddd"
                         placeholder="DDD" />
-                    <mat-error *ngIf="collaboratorProfileForm &&
+                    <mat-error
+                        *ngIf="collaboratorProfileForm &&
                         collaboratorProfileForm.controls['ddd'].hasError('required')">
-                        {{'validators.validator-required' | translate}}
+                        {{ "validators.validator-required" | translate }}
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field fxFlex="75" appearance="outline">
-                    <mat-label>{{"auth-service-list.phone_number" | translate}}</mat-label>
-                    <input matInput formControlName="phoneNumber"
-                        placeholder="Telefone" mask="0000-0000||00000-0000" />
-                    <mat-error *ngIf="collaboratorProfileForm &&
-                        collaboratorProfileForm.controls['phoneNumber'].hasError('required')">
-                        {{'validators.validator-required' | translate}}
+                    <mat-label>{{
+                        "auth-service-list.phone_number" | translate
+                        }}</mat-label>
+                    <input
+                        matInput
+                        formControlName="phoneNumber"
+                        placeholder="Telefone"
+                        mask="0000-0000||00000-0000"
+                        />
+                    <mat-error
+                        *ngIf="collaboratorProfileForm &&
+                        collaboratorProfileForm.controls['phoneNumber'].hasError(
+                        'required'
+                        )">
+                        {{ "validators.validator-required" | translate }}
                     </mat-error>
                 </mat-form-field>
-
             </div>
 
             <div fxFlex="100" fxLayoutGap="16px">
                 <mat-form-field fxFlex="50" appearance="outline">
-                    <mat-label>{{"auth-service-list.profile" | translate}}</mat-label>
+                    <mat-label>{{ "auth-service-list.profile" | translate }}</mat-label>
                     <mat-select matInput formControlName="profile">
                         <mat-option [value]="1">Diretor Tecnologia</mat-option>
                         <mat-option [value]="2">Diretor Comercial</mat-option>
@@ -71,37 +103,41 @@
                         <mat-option [value]="5">Coordenador RH</mat-option>
                         <mat-option [value]="6">Coordenador AMS</mat-option>
                     </mat-select>
-                    <mat-error *ngIf="collaboratorProfileForm &&
+                    <mat-error
+                        *ngIf="collaboratorProfileForm &&
                         collaboratorProfileForm.controls['profile'].hasError('required')">
-                        {{'validators.validator-required' | translate}}
+                        {{ "validators.validator-required" | translate }}
                     </mat-error>
                 </mat-form-field>
 
                 <mat-form-field fxFlex="50" appearance="outline">
-                    <mat-label>{{"auth-service-list.login" | translate}}</mat-label>
-                    <input matInput formControlName="login"
-                        placeholder="Login" />
-                    <mat-error *ngIf="collaboratorProfileForm &&
+                    <mat-label>{{ "auth-service-list.login" | translate }}</mat-label>
+                    <input matInput formControlName="login" placeholder="Login"
+                        />
+                    <mat-error
+                        *ngIf="collaboratorProfileForm &&
                         collaboratorProfileForm.controls['login'].hasError('required')">
-                        {{'validators.validator-required' | translate}}
+                        {{ "validators.validator-required" | translate }}
                     </mat-error>
                 </mat-form-field>
-
             </div>
 
             <div fxFlex="100" fxLayoutGap="16px">
-
-
                 <mat-form-field fxFlex="100" appearance="outline">
-                    <mat-label>{{"auth-service-list.password" | translate}}</mat-label>
-                    <input matInput formControlName="password"
-                        placeholder="Senha" [type]="show ? 'text' : 'password'"
+                    <mat-label>{{ "auth-service-list.password" | translate }}</mat-label>
+                    <input
+                        matInput
+                        formControlName="password"
+                        placeholder="Senha"
+                        [type]="show ? 'text' : 'password'"
                         />
-                    <mat-icon matPrefix (click)="password()">{{show === false ?
-                        'visibility_off' : 'visibility'}}</mat-icon>
-                    <mat-error *ngIf="collaboratorProfileForm &&
+                    <mat-icon matPrefix (click)="password()">{{
+                        show === false ? "visibility_off" : "visibility"
+                        }}</mat-icon>
+                    <mat-error
+                        *ngIf="collaboratorProfileForm &&
                         collaboratorProfileForm.controls['password'].hasError('required')">
-                        {{'validators.validator-required' | translate}}
+                        {{ "validators.validator-required" | translate }}
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -109,7 +145,8 @@
     </div>
     <div class="navigation-buttons" fxLayoutAlign="center end"
         fxLayoutGap="16px">
-        <button mat-flat-button color="primary">{{"auth-service-list.button_save"
-            | translate}}</button>
+        <button mat-flat-button color="primary">
+            {{ "auth-service-list.button_save" | translate }}
+        </button>
     </div>
 </div>

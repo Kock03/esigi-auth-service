@@ -10,7 +10,7 @@ export class UsersService {
   constructor(
     @InjectRepository(UsersEntity)
     private readonly usersRepository: Repository<UsersEntity>,
-  ) {}
+  ) { }
 
   async findAll() {
     return await this.usersRepository.find({

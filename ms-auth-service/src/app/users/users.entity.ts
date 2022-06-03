@@ -39,4 +39,9 @@ export class UsersEntity {
   hasPassword() {
     this.password = hashSync(this.password, 10);
   }
+
+  @BeforeInsert()
+  insertEmail() {
+    this.email = `${this.firstName}${this.lastName}@envolti.com.br`
+  }
 }

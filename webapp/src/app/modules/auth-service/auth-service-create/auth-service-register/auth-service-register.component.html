@@ -17,7 +17,7 @@
             class="form-control">
             <div fxFlex="100" fxLayoutGap="16px">
                 <mat-form-field
-                    fxFlex="34"
+                    fxFlex="50"
                     class="example-full-width"
                     appearance="outline">
                     <mat-label>{{"auth-service-list.name" | translate}}</mat-label>
@@ -93,21 +93,30 @@
             </div>
 
             <div fxFlex="100" fxLayoutGap="16px">
-                <mat-form-field fxFlex="50" appearance="outline">
+                <mat-form-field
+                    fxFlex="50"
+                    class="example-full-width"
+                    appearance="outline">
                     <mat-label>{{ "auth-service-list.profile" | translate }}</mat-label>
-                    <mat-select matInput formControlName="profile">
-                        <mat-option [value]="1">Diretor Tecnologia</mat-option>
-                        <mat-option [value]="2">Diretor Comercial</mat-option>
-                        <mat-option [value]="3">Diretor Administrativo</mat-option>
-                        <mat-option [value]="4">Gerente de Operações</mat-option>
-                        <mat-option [value]="5">Coordenador RH</mat-option>
-                        <mat-option [value]="6">Coordenador AMS</mat-option>
-                    </mat-select>
-                    <mat-error
-                        *ngIf="collaboratorProfileForm &&
-                        collaboratorProfileForm.controls['profile'].hasError('required')">
-                        {{ "validators.validator-required" | translate }}
-                    </mat-error>
+                    <input
+                        type="text"
+                        placeholder="Perfil"
+                        aria-label="text"
+                        #filter
+                        matInput
+                        [matAutocomplete]="auto"
+                        [formControl]="profileControl"
+                        />
+                    <mat-autocomplete
+                        autoActiveFirstOption
+                        #auto="matAutocomplete"
+                        [displayWith]="displayFnProfile">
+                        <mat-option
+                            *ngFor="let profile of filteredProfiles"
+                            [value]="profile">
+                            {{ profile.name }}
+                        </mat-option>
+                    </mat-autocomplete>
                 </mat-form-field>
 
                 <mat-form-field fxFlex="50" appearance="outline">

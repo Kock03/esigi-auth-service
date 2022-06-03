@@ -10,6 +10,16 @@ export class ProfileProvider {
 
     ngOnInit(): void { }
 
+    shortListProfile(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.apiGateway
+                .get(environment.AUTHORIZATION_MS + 'profiles/short/list/profiles')
+                .subscribe((response: HttpResponse<any>) => {
+                    resolve(response.body);
+                }, reject);
+        });
+    }
+
     findAll(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway

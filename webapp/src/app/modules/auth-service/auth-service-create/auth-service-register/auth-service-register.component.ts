@@ -39,6 +39,7 @@ export class AuthServiceRegisterComponent implements OnInit {
   profileValid: boolean = false;
   profiles!: IProfile[] | any[];
   filteredProfileList: any;
+  filteredProfiles?: any[];
   
 
   constructor(
@@ -63,7 +64,7 @@ export class AuthServiceRegisterComponent implements OnInit {
 
   async getProfileList() {
     this.filteredProfileList = this.profiles =
-      await this.collaboratorProvider.shortListCollaborators();
+      await this.profileProvider.shortListProfile();
   }
 
 
@@ -113,13 +114,13 @@ export class AuthServiceRegisterComponent implements OnInit {
       : '';
   }
 
-  displayFnProfile(name: any): string {
-    if (typeof name === 'string' && this.profiles) {
+  displayFnProfile(user: any): string {
+    if (typeof user === 'string' && this.profiles) {
       return this.profiles.find(
-        (profile) => profile.id === name
+        (profile) => profile.id === user
       );
     }
-    return name;
+    return user && user.name ? user.name : '';
   }
 
   private async _filter(name: string): Promise<void> {
@@ -131,7 +132,7 @@ export class AuthServiceRegisterComponent implements OnInit {
 
   private async _filterProfile(name: string): Promise<void> {
     const params = `name=${name}`;
-    this.filteredProfileList = await this.profileProvider.findByName(
+    this.filteredProfiles = await this.profileProvider.findByName(
       params
     );
   }

@@ -104,12 +104,12 @@
                         aria-label="text"
                         #filter
                         matInput
-                        [matAutocomplete]="auto"
+                        [matAutocomplete]="now"
                         [formControl]="profileControl"
                         />
                     <mat-autocomplete
                         autoActiveFirstOption
-                        #auto="matAutocomplete"
+                        #now="matAutocomplete"
                         [displayWith]="displayFnProfile">
                         <mat-option
                             *ngFor="let profile of filteredProfiles"

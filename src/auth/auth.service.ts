@@ -26,10 +26,23 @@ export class AuthService {
   }
 
   async login(user: UsersEntity) {
-    const payload = { sud: user.id, email: user.email };
-
+    const payload = {
+      sud: user.id,
+      email: user.email,
+      roles: user.profile.map((profile) => {
+        return profile.role.name;
+      }),
+    };
     return {
       token: this.jwtService.sign(payload),
+      profiles: user.profile,
     };
+  }
+
+  verifyToken(jwt: any) {
+    const verify = this.jwtService.verify(jwt);
+    if (verify) {
+      return true;
+    } 
   }
 }

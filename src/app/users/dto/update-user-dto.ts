@@ -1,4 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
+import { ProfilesEntity } from 'src/app/profiles/profiles.entity';
 
 export class UpdateUserDto {
   @IsNotEmpty()
@@ -6,4 +7,7 @@ export class UpdateUserDto {
 
   @IsNotEmpty()
   lastName: string;
+
+  @IsNotEmpty()
+  profile: ProfilesEntity[];
 }

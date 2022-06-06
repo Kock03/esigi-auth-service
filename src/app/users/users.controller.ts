@@ -1,4 +1,3 @@
-import { AuthService } from './../../auth/auth.service';
 import { UpdateUserDto } from './dto/update-user-dto';
 import { CreateUserDto } from './dto/create-user-dto';
 import { UsersService } from './users.service';
@@ -13,16 +12,19 @@ import {
   ParseUUIDPipe,
   Post,
   Put,
+  SetMetadata,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from '../roles/role.guard';
 
 @Controller('api/v1/users')
-@UseGuards(AuthGuard('jwt'))
+@UseGuards(AuthGuard('jwt'), RolesGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
+  @SetMetadata('roles', ['admin'])
   async index() {
     return await this.usersService.findAll();
   }

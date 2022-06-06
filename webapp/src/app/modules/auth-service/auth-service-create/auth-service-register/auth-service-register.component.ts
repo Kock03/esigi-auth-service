@@ -34,13 +34,14 @@ export class AuthServiceRegisterComponent implements OnInit {
   collaboratorValid: boolean = false;
   filteredCollaboratorList: any;
   filteredCollaborators?: any[];
+
   profileControl = new FormControl();
   profile!: IProfile;
-  profileValid: boolean = false;
   profiles!: IProfile[] | any[];
+  profileValid: boolean = false;
   filteredProfileList: any;
   filteredProfiles?: any[];
-  
+
 
   constructor(
     private fb: FormBuilder,
@@ -70,7 +71,7 @@ export class AuthServiceRegisterComponent implements OnInit {
 
   password() {
     this.show = !this.show;
-}
+  }
 
   listCollaborator() {
     this.router.navigate(['autorizacao/lista']);

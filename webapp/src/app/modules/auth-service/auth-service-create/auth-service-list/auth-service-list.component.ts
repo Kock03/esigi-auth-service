@@ -13,7 +13,7 @@ export class AuthServiceListComponent implements OnInit {
 
   displayedCollaborator: string[] = [
     'collaborator',
-    'admissionDate',
+    'permissions',
     'status',
     'icon',
   ];

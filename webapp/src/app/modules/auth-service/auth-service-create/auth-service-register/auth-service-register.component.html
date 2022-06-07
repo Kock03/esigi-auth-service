@@ -133,14 +133,14 @@
 
             <div fxFlex="100" fxLayoutGap="16px">
                 <mat-form-field fxFlex="100" appearance="outline">
-                    <mat-label>{{ "auth-service-list.password" | translate }}</mat-label>
+                    <mat-label class="label">{{ "auth-service-list.password" | translate }}</mat-label>
                     <input
                         matInput
                         formControlName="password"
                         placeholder="Senha"
                         [type]="show ? 'text' : 'password'"
                         />
-                    <mat-icon matPrefix (click)="password()">{{
+                    <mat-icon class="icon" matPrefix (click)="password()">{{
                         show === false ? "visibility_off" : "visibility"
                         }}</mat-icon>
                     <mat-error

@@ -4,7 +4,7 @@
 
 export const environment = {
   COLLABORATOR_MS: 'localhost:3501/api/v1/',
-  AUTHORIZATION_MS: 'localhost:3000/api/v1/',
+  AUTHORIZATION_MS: 'localhost:3507/api/v1/',
   production: false,
   message: 'LOCAL',
   protocol: 'http',

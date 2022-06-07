@@ -10,6 +10,9 @@ export class CreateUserDto {
     lastName: string
 
     @IsNotEmpty()
+    email: string
+
+    @IsNotEmpty()
     // @Matches(RegExHelper.password, {message: MessagesHelper.PASSWORD_INVALID})
     password: string
 }

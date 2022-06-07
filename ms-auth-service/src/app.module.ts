@@ -1,3 +1,4 @@
+import { SendGridModule } from '@anchan828/nest-sendgrid';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
@@ -8,6 +9,9 @@ import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    SendGridModule.forRoot({
+      apikey: process.env.SEND_GRID_ACCESS_KEY,
+    }),
     TypeOrmModule.forRoot({
       type: process.env.TYPEORM_CONNECTION,
       host: process.env.TYPEORM_HOST,
@@ -24,4 +28,4 @@ import { AuthModule } from './auth/auth.module';
   controllers: [],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

@@ -15,25 +15,28 @@ export class UsersEntity {
   id: string;
 
   @Column({ name: 'first_name' })
-  firstName: String;
+  firstName: string;
 
   @Column({ name: 'last_name' })
-  lastName: String;
+  lastName: string;
 
   @Column()
-  email: String;
+  email: string;
 
   @Column()
-  password: String;
+  login: string;
+
+  @Column()
+  password: string;
 
   @CreateDateColumn({ name: 'created_at' })
-  createdAt: String;
+  createdAt: string;
 
   @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: String;
+  updatedAt: string;
 
   @DeleteDateColumn({ name: 'deleted_at' })
-  deletedAt: String;
+  deletedAt: string;
 
   @BeforeInsert()
   hasPassword() {
@@ -42,6 +45,6 @@ export class UsersEntity {
 
   @BeforeInsert()
   insertEmail() {
-    this.email = `${this.firstName}${this.lastName}@envolti.com.br`
+    this.login = `${this.firstName}.${this.lastName}@envolti.com.br`
   }
 }

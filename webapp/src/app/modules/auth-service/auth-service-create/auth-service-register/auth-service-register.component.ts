@@ -10,11 +10,20 @@ export interface ICollaborator {
   id: string;
   firstNameCorporateName: string;
   lastNameCorporateName: string;
+  email: string;
 }
 
 export interface IProfile {
   id: string;
   name: string;
+}
+
+export interface IPhone {
+  id: string;
+  Phone: { 
+    phoneNumber: string;
+    ddd: string;
+  };
 }
 
 @Component({
@@ -42,7 +51,6 @@ export class AuthServiceRegisterComponent implements OnInit {
   filteredProfileList: any;
   filteredProfiles?: any[];
 
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -55,12 +63,12 @@ export class AuthServiceRegisterComponent implements OnInit {
     this.getCollaboratorList();
     this.getProfileList();
     this.initFilter();
-    this.initFilterProfile()
+    this.initFilterProfile() ;
   }
 
   async getCollaboratorList() {
     this.filteredCollaboratorList = this.collaborators =
-      await this.collaboratorProvider.shortListCollaborators();
+    await this.collaboratorProvider.shortListCollaborators();
   }
 
   async getProfileList() {
@@ -104,6 +112,7 @@ export class AuthServiceRegisterComponent implements OnInit {
       });
   }
 
+
   displayFn(user: any): string {
     if (typeof user === 'string' && this.collaborators) {
       return this.collaborators.find(
@@ -111,7 +120,7 @@ export class AuthServiceRegisterComponent implements OnInit {
       );
     }
     return user && user.firstNameCorporateName && user.lastNameFantasyName
-      ? user.firstNameCorporateName + ' ' + user.lastNameFantasyName
+      ? user.firstNameCorporateName + ' ' + user.lastNameFantasyName 
       : '';
   }
 
@@ -139,13 +148,12 @@ export class AuthServiceRegisterComponent implements OnInit {
   }
 
 
-
   initForm() {
     this.collaboratorProfileForm = this.fb.group({
       collaboratorId: [null],
-      email: [null, [Validators.required, Validators.email]],
-      ddd: [null, Validators.required],
-      phoneNumber: [null, Validators.required],
+      email: [null],
+      phoneNumber: [null],
+      ddd: [null],
       name: [null],
       login: [null, Validators.required],
       password: [null, Validators.required],
@@ -154,6 +162,15 @@ export class AuthServiceRegisterComponent implements OnInit {
     this.collaboratorControl.valueChanges.subscribe((res) => {
       if (res && res.id) {
         this.collaboratorProfileForm.controls['collaboratorId'].setValue(res.id, {
+          emitEvent: true,
+        });
+        this.collaboratorProfileForm.controls['email'].setValue(res.email, {
+          emitEvent: true,
+        });
+        this.collaboratorProfileForm.controls['ddd'].setValue(res.Phone.ddd, {
+          emitEvent: true,
+        });
+        this.collaboratorProfileForm.controls['phoneNumber'].setValue(res.Phone.phoneNumber, {
           emitEvent: true,
         });
       }

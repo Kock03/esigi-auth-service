@@ -27,6 +27,9 @@ export class UsersEntity {
   login: string;
 
   @Column()
+  collaboratorId: string;
+
+  @Column()
   password: string;
 
   @CreateDateColumn({ name: 'created_at' })

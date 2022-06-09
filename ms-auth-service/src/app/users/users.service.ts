@@ -45,7 +45,9 @@ export class UsersService {
       from: process.env.FROM_EMAIL,
       subject: "Informações do login",
       text: `Seus dados de acesso são: Login${login} e senha ${password}@envolti.com.br`,
-      html: `<div><strong>Bem Vindo a Envolti!</strong> Seus dados de acesso são: Login ${login} e senha ${password}</div>`,
+      html: `<div><h1><strong>Bem Vindo a Envolti!</strong></h1></div>
+            <div> <h2>Seus dados de acesso são: </h2></div>
+            <div> <h2><strong> Login ${login} e senha ${password}</strong> </h2></div>`,
     });
   }
 

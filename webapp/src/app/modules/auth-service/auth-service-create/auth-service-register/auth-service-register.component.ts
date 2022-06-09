@@ -42,6 +42,7 @@ export class AuthServiceRegisterComponent implements OnInit {
   collaborators!: ICollaborator[] | any[];
   collaboratorValid: boolean = false;
   filteredCollaboratorList: any;
+  collaboratorId!: string | null;
   filteredCollaborators?: any[];
 
   profileControl = new FormControl();
@@ -74,6 +75,19 @@ export class AuthServiceRegisterComponent implements OnInit {
   async getProfileList() {
     this.filteredProfileList = this.profiles =
       await this.profileProvider.shortListProfile();
+  }
+
+  async saveCollaborator() {
+    let data = this.collaboratorProfileForm.getRawValue();
+    console.log("🚀 ~ file: auth-service-register.component.ts ~ line 82 ~ AuthServiceRegisterComponent ~ saveCollaborator ~ data", data)
+    try {
+      const job = await this.collaboratorProvider.create(
+        data.collaboratorId, data
+      );
+    }
+    catch (err) {
+      
+    }
   }
 
 
@@ -154,9 +168,10 @@ export class AuthServiceRegisterComponent implements OnInit {
       email: [null],
       phoneNumber: [null],
       ddd: [null],
-      name: [null],
+      Permission: [null],
       login: [null, Validators.required],
       password: [null, Validators.required],
+      
     });
 
     this.collaboratorControl.valueChanges.subscribe((res) => {
@@ -178,7 +193,7 @@ export class AuthServiceRegisterComponent implements OnInit {
 
     this.profileControl.valueChanges.subscribe((res) => {
       if (res && res.id) {
-        this.collaboratorProfileForm.controls['name'].setValue(res.id, {
+        this.collaboratorProfileForm.controls['Permission'].setValue({id: res.id}, {
           emitEvent: true,
         });
       }

@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
+    AuthModule,
     ConfigModule.forRoot(),
     SendGridModule.forRoot({
       apikey: process.env.SEND_GRID_ACCESS_KEY,
@@ -23,9 +24,8 @@ import { AuthModule } from './auth/auth.module';
       synchronize: true,
     } as TypeOrmModuleOptions),
     UsersModule,
-    AuthModule
   ],
   controllers: [],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

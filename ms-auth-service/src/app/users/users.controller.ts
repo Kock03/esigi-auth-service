@@ -1,4 +1,3 @@
-import { AuthService } from './../../auth/auth.service';
 import { UpdateUserDto } from './dto/update-user-dto';
 import { CreateUserDto } from './dto/create-user-dto';
 import { UsersService } from './users.service';
@@ -13,9 +12,8 @@ import {
   ParseUUIDPipe,
   Post,
   Put,
-  UseGuards,
+  SetMetadata,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 
 @Controller('api/v1/users')
 export class UsersController {

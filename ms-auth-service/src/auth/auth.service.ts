@@ -33,4 +33,11 @@ export class AuthService {
       token: this.jwtService.sign(payload),
     };
   }
+
+  verifyToken(jwt: any) {
+    const verify = this.jwtService.verify(jwt);
+    if (verify) {
+      return true;
+    } 
+  }
 }

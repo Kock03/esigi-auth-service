@@ -221,6 +221,7 @@ export class AuthServiceRegisterComponent implements OnInit {
         this.collaboratorProfileForm.controls['login'].setValue(res.login, {
           emitEvent: true,
         });
+        this.getUserId(res.id)
       }
     });
 

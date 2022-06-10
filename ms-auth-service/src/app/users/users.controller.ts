@@ -13,6 +13,7 @@ import {
   ParseUUIDPipe,
   Post,
   Put,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -34,6 +35,11 @@ export class UsersController {
   @Get(':id')
   async show(@Param('id', new ParseUUIDPipe()) id: string) {
     return await this.usersService.findOneOrFail({ id });
+  }
+
+  @Get('find/:collaboratorId')
+  async findCollaborator(@Param('collaboratorId') collaborator: string) {
+    return this.usersService.findForCollaborator(collaborator);
   }
 
   @Put(':id')

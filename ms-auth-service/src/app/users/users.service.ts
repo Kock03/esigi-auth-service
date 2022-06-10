@@ -33,6 +33,18 @@ export class UsersService {
     }
   }
 
+  async findForCollaborator(collaborator) {
+    return await this.usersRepository
+      .find({
+        select: ['id', 'login', 'collaboratorId'],
+        where: [
+          { collaboratorId: collaborator },],
+      });
+    // .createQueryBuilder('users')
+    // .select('users.id, users.login')
+    // .where("users.collaboratorId  :collaboratorId", { collaboratorId: `${collaboratorId}` })
+  }
+
   async store(data: CreateUserDto) {
     const passwordd = data.password
     const user = this.usersRepository.create(data);

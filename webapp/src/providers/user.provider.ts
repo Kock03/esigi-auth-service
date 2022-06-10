@@ -21,10 +21,10 @@ export class UserProvider {
         });
     }
 
-    findOne (id: string){
+    findOne (collaborator: string){
     return new Promise((resolve, reject) => {
         this.apiGateway
-            .get(environment.AUTH_SERVICE_MS + 'users/info/:id', { id: id })
+            .get(environment.AUTH_SERVICE_MS + 'users/find/:collaboratorId', { collaboratorId: collaborator })
             .subscribe((response: HttpResponse<any>) => {
                 resolve(response.body);
             }, reject);

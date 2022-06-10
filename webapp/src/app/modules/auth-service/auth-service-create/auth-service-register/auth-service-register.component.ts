@@ -62,7 +62,7 @@ export class AuthServiceRegisterComponent implements OnInit {
 
   userControl = new FormControl();
   userId!: string | null;
-  users!: IUser[] | any[];
+  users!: any;
 
 
 
@@ -110,8 +110,8 @@ export class AuthServiceRegisterComponent implements OnInit {
 
 
   async getUserId(collabotatorId: string) {
-    let data = this.collaboratorProfileForm.getRawValue();
-    this.users == await this.userProvider.findOne(
+
+    this.users = await this.userProvider.findOne(
       collabotatorId
     )
     console.log("🚀 ~ file: auth-service-register.component.ts ~ line 117 ~ AuthServiceRegisterComponent ~ getUserId ~ users", this.users)

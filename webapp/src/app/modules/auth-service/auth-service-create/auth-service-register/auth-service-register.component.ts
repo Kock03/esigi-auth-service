@@ -67,8 +67,6 @@ export class AuthServiceRegisterComponent implements OnInit {
   log!: any
 
 
-
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -238,7 +236,11 @@ export class AuthServiceRegisterComponent implements OnInit {
         });
       }
     });
+
+
+
   }
+
 
   next() {
     this.onChange.next(true);

@@ -12,7 +12,6 @@ export interface ICollaborator {
   firstNameCorporateName: string;
   lastNameCorporateName: string;
   email: string;
-  login: string;
   password: string;
 }
 
@@ -31,6 +30,7 @@ export interface IPhone {
 }
 export interface IUser {
   id: string
+  login: string,
 }
 
 @Component({
@@ -61,8 +61,10 @@ export class AuthServiceRegisterComponent implements OnInit {
   filteredProfiles?: any[];
 
   userControl = new FormControl();
-  userId!: string | null;
-  users!: any;
+  userId!: any;
+  dataUser: any;
+  user!: IUser;
+  log!: any
 
 
 
@@ -86,7 +88,6 @@ export class AuthServiceRegisterComponent implements OnInit {
   async getCollaboratorList() {
     this.filteredCollaboratorList = this.collaborators =
       await this.collaboratorProvider.shortListCollaborators();
-    // await this.collaboratorProvider.findCollaborator()
   }
 
   async getProfileList() {
@@ -95,26 +96,35 @@ export class AuthServiceRegisterComponent implements OnInit {
   }
 
   async saveCollaborator() {
-    // this.collaboratorProfileForm.controls['password'].getRawValue()
     let data = this.collaboratorProfileForm.getRawValue();
-    console.log("🚀 ~ file: auth-service-register.component.ts ~ line 82 ~ AuthServiceRegisterComponent ~ saveCollaborator ~ data", data)
+    console.log("🚀 ~ file: auth-service-register.component.ts ~ line 82 ~ AuthServiceRegisterComponent ~ saveCollaborator ~ data", data.userId, data.password)
     try {
       const job = await this.userProvider.update(
         data.userId, data.password
       );
     }
     catch (err) {
-      // const user = await 
+      console.log(err)
     }
   }
 
+  //Essa função tem como objetivo subscrever o input de login, ele pega o res.id do collaboratorForm
+  // dentro do initForm, onde é feita a chamada do método, e passa o login direto no controlls setando o setValue 
+  // com o valor retornado do microserviço
+  getUserId(collabotatorId: string) {
 
-  async getUserId(collabotatorId: string) {
-
-    this.users = await this.userProvider.findOne(
+    return this.userProvider.findOne(
       collabotatorId
-    )
-    console.log("🚀 ~ file: auth-service-register.component.ts ~ line 117 ~ AuthServiceRegisterComponent ~ getUserId ~ users", this.users)
+    ).then((res: any) => {
+
+      this.userId = res[0].id;
+      this.log = res[0].login;
+      console.log(this.log);
+      this.collaboratorProfileForm.controls['login'].setValue(this.log)
+      this.collaboratorProfileForm.controls['userId'].setValue(this.userId)
+      console.log(this.userId)
+    });
+
   }
 
   passwordShow() {
@@ -203,12 +213,12 @@ export class AuthServiceRegisterComponent implements OnInit {
 
     this.collaboratorControl.valueChanges.subscribe((res) => {
       if (res && res.id) {
-        console.log("🚀 ~ file: auth-service-register.component.ts ~ line 185 ~ AuthServiceRegisterComponent ~ this.collaboratorControl.valueChanges.subscribe ~ res", res)
+        this.getUserId(res.id)
+
         this.collaboratorProfileForm.controls['collaboratorId'].setValue(res.id, {
           emitEvent: true,
         });
-        this.getUserId(res.id)
-        
+
         this.collaboratorProfileForm.controls['email'].setValue(res.email, {
           emitEvent: true,
         });
@@ -218,10 +228,6 @@ export class AuthServiceRegisterComponent implements OnInit {
         this.collaboratorProfileForm.controls['phoneNumber'].setValue(res.Phone.phoneNumber, {
           emitEvent: true,
         });
-        this.collaboratorProfileForm.controls['login'].setValue(res.login, {
-          emitEvent: true,
-        });
-        this.getUserId(res.id)
       }
     });
 

@@ -23,6 +23,7 @@
     "profile": "Perfil",
     "login": "Login",
     "password": "Senha",
+    "optional_password": "Nova Senha",
     "button_save": "Salvar"
   },
   "validators": {

@@ -31,6 +31,12 @@ export interface IPhone {
 }
 export interface IUser {
   id: string
+  userId: string
+}
+
+
+export interface IPassword {
+  password: string;
 }
 
 @Component({
@@ -63,8 +69,6 @@ export class AuthServiceRegisterComponent implements OnInit {
   userControl = new FormControl();
   userId!: string | null;
   users!: any;
-
-
 
 
   constructor(
@@ -106,9 +110,13 @@ export class AuthServiceRegisterComponent implements OnInit {
     catch (err) {
       // const user = await 
     }
-  }
 
-
+    if (data.password =! ''){
+      const newPassword = await this.userProvider.update(
+        data.userId, data.password
+      );
+  }};
+  
   async getUserId(collabotatorId: string) {
 
     this.users = await this.userProvider.findOne(
@@ -162,7 +170,7 @@ export class AuthServiceRegisterComponent implements OnInit {
     return user && user.firstNameCorporateName && user.lastNameFantasyName
       ? user.firstNameCorporateName + ' ' + user.lastNameFantasyName
       : '';
-  }
+  } 
 
   displayFnProfile(user: any): string {
     if (typeof user === 'string' && this.profiles) {
@@ -232,7 +240,11 @@ export class AuthServiceRegisterComponent implements OnInit {
         });
       }
     });
+
+
+
   }
+
 
   next() {
     this.onChange.next(true);

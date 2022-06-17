@@ -29,7 +29,7 @@ export class UsersEntity {
   @Column()
   collaboratorId: string;
 
-  @Column()
+  @Column({ nullable: true })
   profileId: string;
 
   @Column()

@@ -11,10 +11,10 @@ export class UserProvider {
     ngOnInit(): void { }
 
 
-    update(id: string | null, password: any): Promise<any> {
+    update(id: string | null, user: any): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .put(environment.AUTH_SERVICE_MS + 'users/:id', { id: id }, password)
+                .put(environment.AUTH_SERVICE_MS + 'users/:id', { id: id }, user)
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);

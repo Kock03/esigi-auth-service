@@ -29,5 +29,9 @@
   "validators": {
     "validator-required": "Campo Obrigatório",
     "validator-email": "Email inválido"
+  },
+  "generic": {
+    "cancel_button": "Cancelar",
+    "delete_button": "Deletar"
   }
 }

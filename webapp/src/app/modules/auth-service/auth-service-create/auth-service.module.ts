@@ -14,6 +14,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgxMaskModule } from 'ngx-mask';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { SnackBarComponent } from 'src/app/components/snack-bar/snack-bar.component';
+import { SnackBarService } from 'src/services/snackbar.service';
+import { ConfirmDialogService } from 'src/services/confirm-dialog.service';
 
 const routes: Routes = [
   {
@@ -29,7 +32,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AuthServiceCreateComponent,
-    AuthServiceListComponent
+    AuthServiceListComponent,
+
   ],
   imports: [
     CommonModule,

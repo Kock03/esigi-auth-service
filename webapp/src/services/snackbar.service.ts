@@ -4,7 +4,7 @@ import { SnackBarComponent } from 'src/app/components/snack-bar/snack-bar.compon
 
 @Injectable()
 export class SnackBarService {
-  constructor(public snackBar: MatSnackBar, public zone: NgZone) {}
+  constructor(public snackBar: MatSnackBar, public zone: NgZone) { }
 
   public showAlert(message: string, icon?: string) {
     this.snackBar.openFromComponent(SnackBarComponent, {

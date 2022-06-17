@@ -22,7 +22,7 @@
 
                 <mat-form-field fxFlex="50" appearance="outline">
                     <mat-label>{{ "auth-service-list.email" | translate }}</mat-label>
-                    <input matInput formControlName="email" placeholder="Email" />
+                    <input matInput formControlName="email" placeholder="Email" readonly />
                     <mat-error *ngIf="
               collaboratorProfileForm &&
               collaboratorProfileForm.controls['email'].hasError('required')
@@ -41,14 +41,14 @@
             <div fxFlex="100" fxLayoutGap="16px">
                 <mat-form-field fxFlex="30" appearance="outline">
                     <mat-label>{{ "auth-service-list.ddd" | translate }}</mat-label>
-                    <input type="text" placeholder="DDD" formControlName="ddd" matInput mask="(00)" />
+                    <input type="text" placeholder="DDD" formControlName="ddd" matInput mask="(00)" readonly />
                 </mat-form-field>
                 <mat-form-field fxFlex="70" appearance="outline">
                     <mat-label>{{
                         "auth-service-list.phone_number" | translate
                         }}</mat-label>
                     <input matInput type="text" placeholder="Telefone" phoneNumber mask="0000-0000 || 00000-0000"
-                        formControlName="phoneNumber" />
+                        formControlName="phoneNumber" readonly />
                 </mat-form-field>
             </div>
 
@@ -66,7 +66,7 @@
 
                 <mat-form-field fxFlex="50" appearance="outline">
                     <mat-label>{{ "auth-service-list.login" | translate }}</mat-label>
-                    <input matInput formControlName="login" placeholder="Login" />
+                    <input matInput formControlName="login" placeholder="Login" readonly />
                     <mat-error *ngIf="
               collaboratorProfileForm &&
               collaboratorProfileForm.controls['login'].hasError('required')

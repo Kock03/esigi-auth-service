@@ -5,6 +5,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { CollaboratorProvider } from 'src/providers/collaborator.provider';
 import { ProfileProvider } from 'src/providers/profile.provider';
 import { UserProvider } from 'src/providers/user.provider';
+import { SnackBarService } from 'src/services/snackbar.service';
 
 
 export interface ICollaborator {
@@ -72,7 +73,8 @@ export class AuthServiceCreateComponent implements OnInit {
     private router: Router,
     private collaboratorProvider: CollaboratorProvider,
     private profileProvider: ProfileProvider,
-    private userProvider: UserProvider
+    private userProvider: UserProvider,
+    private snackbarService: SnackBarService,
   ) { }
 
   ngOnInit(): void {
@@ -103,6 +105,7 @@ export class AuthServiceCreateComponent implements OnInit {
           this.userId, { profileId: id }
         );
         this.router.navigate(['autorizacao/lista']);
+        this.snackbarService.successMessage('Informações alteradas Com Sucesso');
       }
       catch (err) {
         console.log(err)
@@ -113,6 +116,8 @@ export class AuthServiceCreateComponent implements OnInit {
           this.userId, { password: data.password, profileId: id }
         );
         this.router.navigate(['autorizacao/lista']);
+        this.snackbarService.successMessage('Informações alteradas Com Sucesso');
+
       }
       catch (err) {
         console.log(err)

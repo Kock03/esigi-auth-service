@@ -71,5 +71,15 @@ export class CollaboratorProvider {
     });   
   }
 
+  destroy(collaboratorId: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+        this.apiGateway
+            .delete(environment.COLLABORATOR_MS + 'profiles/' + collaboratorId)
+            .subscribe((response: HttpResponse<any>) => {
+                resolve(response.body);
+            }, reject);
+    });
+}
+
   
 }

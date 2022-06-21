@@ -47,7 +47,8 @@ export class UsersService {
       text: `Seus dados de acesso são: Login${login} e senha ${password}@envolti.com.br`,
       html: `<div><h1><strong>Bem Vindo a Envolti!</strong></h1></div>
             <div> <h2>Seus dados de acesso são: </h2></div>
-            <div> <h2><strong> Login ${login} e senha ${password}</strong> </h2></div>`,
+            <div> <h2><strong> Login: ${login}</h2></div>
+            <div> <h2>Senha: ${password}</strong> </h2></div> `,
     });
   }
 

@@ -36,13 +36,11 @@ export class UsersService {
   async findForCollaborator(collaborator) {
     return await this.usersRepository
       .find({
-        select: ['id', 'login', 'collaboratorId'],
-        where: [
-          { collaboratorId: collaborator },],
+        select: ['id', 'login'],
+        where:
+          { collaboratorId: collaborator },
       });
-    // .createQueryBuilder('users')
-    // .select('users.id, users.login')
-    // .where("users.collaboratorId  :collaboratorId", { collaboratorId: `${collaboratorId}` })
+
   }
 
   async store(data: CreateUserDto) {
@@ -64,9 +62,15 @@ export class UsersService {
   }
 
   async update(id: string, data: UpdateUserDto) {
-    const user = await this.findOneOrFail({ id });
-    this.usersRepository.merge(user, data);
-    return await this.usersRepository.save(user);
+    try {
+      const user = await this.usersRepository.findOneOrFail({
+        id,
+      });
+    } catch {
+      throw new NotFoundException();
+    }
+
+    return await this.usersRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {

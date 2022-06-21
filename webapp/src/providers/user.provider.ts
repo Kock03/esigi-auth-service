@@ -10,15 +10,6 @@ export class UserProvider {
 
     ngOnInit(): void { }
 
-    shortListUser(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.apiGateway
-                .get(environment.AUTH_SERVICE_MS + 'users/short/list/users')
-                .subscribe((response: HttpResponse<any>) => {
-                    resolve(response.body);
-                }, reject);
-        });
-    }
 
     update(id: string | null, user: any): Promise<any> {
         return new Promise((resolve, reject) => {
@@ -30,13 +21,13 @@ export class UserProvider {
         });
     }
 
-    findOne (collaborator: string){
-    return new Promise((resolve, reject) => {
-        this.apiGateway
-            .get(environment.AUTH_SERVICE_MS + 'users/find/:collaboratorId', { collaboratorId: collaborator })
-            .subscribe((response: HttpResponse<any>) => {
-                resolve(response.body);
-            }, reject);
-    });
-}
+    findOne(collaborator: string) {
+        return new Promise((resolve, reject) => {
+            this.apiGateway
+                .get(environment.AUTH_SERVICE_MS + 'users/find/:collaboratorId', { collaboratorId: collaborator })
+                .subscribe((response: HttpResponse<any>) => {
+                    resolve(response.body);
+                }, reject);
+        });
+    }
 }

@@ -29,6 +29,9 @@ export class UsersEntity {
   @Column()
   collaboratorId: string;
 
+  @Column({ nullable: true })
+  profileId: string;
+
   @Column()
   password: string;
 

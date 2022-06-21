@@ -1,0 +1,12 @@
+<div mat-dialog-content>
+  <h3 matDialogTitle>{{ titleMessage }}</h3>
+  <p>{{ subtitleMessage }}</p>
+</div>
+<div mat-dialog-actions fxLayoutAlign="end end">
+  <button mat-flat-button class="delete" (click)="dialogRef.close(false)">
+    {{'generic.cancel_button' | translate}}
+  </button>
+  <button mat-flat-button color="primary" (click)="dialogRef.close(true)">
+    {{'generic.delete_button' | translate}}
+  </button>
+</div>

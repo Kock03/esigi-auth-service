@@ -27,10 +27,12 @@ import { HttpClient } from '@angular/common/http';
 import { AuthServiceCreateComponent } from './modules/auth-service/auth-service-create/auth-service-create.component';
 import { AuthServiceListComponent } from './modules/auth-service/auth-service-create/auth-service-list/auth-service-list.component';
 import { CommonModule } from '@angular/common';
-import { AuthServiceRegisterComponent } from './modules/auth-service/auth-service-create/auth-service-register/auth-service-register.component';
+import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
+import { SnackBarService } from 'src/services/snackbar.service';
+import { ConfirmDialogService } from 'src/services/confirm-dialog.service';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SnackBarComponent],
   imports: [
     NgxMaskModule.forRoot(),
     CommonModule,
@@ -61,10 +63,10 @@ import { AuthServiceRegisterComponent } from './modules/auth-service/auth-servic
     MatInputModule,
     MatTableModule,
   ],
-  providers: [],
+  providers: [SnackBarService, ConfirmDialogService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
 
 export function translateFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);

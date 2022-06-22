@@ -40,6 +40,26 @@ export class ProfileProvider {
         });
     }
 
+    findInactive(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.apiGateway
+                .get(environment.AUTHORIZATION_MS + 'profiles/list/incative')
+                .subscribe((response: HttpResponse<any>) => {
+                    resolve(response.body);
+                }, reject);
+        });
+    }
+
+    findActive(): Promise<any> {
+        return new Promise((resolve, reject) => {
+          this.apiGateway
+            .get(environment.AUTHORIZATION_MS + 'profiles/list/active')
+            .subscribe((response: HttpResponse<any>) => {
+              resolve(response.body);
+            }, reject);
+        });
+      }
+
     findByName(query: any): Promise<any> {
         return new Promise((resolve, reject) => {
             this.apiGateway

@@ -11,10 +11,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { AuthServiceRegisterComponent } from './auth-service-register/auth-service-register.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { TranslateModule } from '@ngx-translate/core';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { SnackBarComponent } from 'src/app/components/snack-bar/snack-bar.component';
+import { SnackBarService } from 'src/services/snackbar.service';
+import { ConfirmDialogService } from 'src/services/confirm-dialog.service';
 
 const routes: Routes = [
   {
@@ -23,7 +25,7 @@ const routes: Routes = [
   },
   {
     path: 'novo',
-    component: AuthServiceRegisterComponent,
+    component: AuthServiceCreateComponent,
   },
 ];
 
@@ -31,7 +33,7 @@ const routes: Routes = [
   declarations: [
     AuthServiceCreateComponent,
     AuthServiceListComponent,
-    AuthServiceRegisterComponent,
+
   ],
   imports: [
     CommonModule,
@@ -49,6 +51,6 @@ const routes: Routes = [
     MatAutocompleteModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [AuthServiceListComponent, AuthServiceRegisterComponent],
+  entryComponents: [AuthServiceListComponent],
 })
-export class AuthServiceModule {}
+export class AuthServiceModule { }

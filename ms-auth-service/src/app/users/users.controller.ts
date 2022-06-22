@@ -12,7 +12,8 @@ import {
   ParseUUIDPipe,
   Post,
   Put,
-  SetMetadata,
+  Query,
+  UseGuards,
 } from '@nestjs/common';
 
 @Controller('api/v1/users')
@@ -44,8 +45,11 @@ export class UsersController {
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() body: UpdateUserDto,
   ) {
+    console.log(id)
     return await this.usersService.update(id, body);
   }
+
+
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)

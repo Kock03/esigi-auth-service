@@ -33,6 +33,7 @@ export class UsersService {
     }
   }
 
+
   async store(data: CreateUserDto) {
     const passwordd = data.password
     const user = this.usersRepository.create(data);
@@ -63,9 +64,15 @@ export class UsersService {
   }
 
   async update(id: string, data: UpdateUserDto) {
-    const user = await this.findOneOrFail({ id });
-    this.usersRepository.merge(user, data);
-    return await this.usersRepository.save(user);
+    try {
+      const user = await this.usersRepository.findOneOrFail({
+        id,
+      });
+    } catch {
+      throw new NotFoundException();
+    }
+
+    return await this.usersRepository.save({ id: id, ...data });
   }
 
   async destroy(id: string) {

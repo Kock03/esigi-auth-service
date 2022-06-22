@@ -11,7 +11,7 @@
 
             <mat-form-field fxFlex="20" appearance="outline">
                 <mat-label>{{"auth-service-list.filter.name" | translate}}</mat-label>
-                <mat-select matInput disableRipple>
+                <mat-select (selectionChange)="selectList($event)" matInput disableRipple>
                     <mat-option [value]="1">{{"auth-service-list.filter.all" | translate}}</mat-option>
                     <mat-option [value]="2">{{"auth-service-list.filter.active" | translate}}</mat-option>
                     <mat-option [value]="3">{{"auth-service-list.filter.inactive" | translate}}</mat-option>

@@ -34,6 +34,11 @@ export class UsersController {
     return await this.usersService.findOneOrFail({ id });
   }
 
+  @Get('find/:collaboratorId')
+  async findCollaborator(@Param('collaboratorId') collaborator: string) {
+    return this.usersService.findForCollaborator(collaborator);
+  }
+
   @Put(':id')
   async update(
     @Param('id', new ParseUUIDPipe()) id: string,

@@ -30,6 +30,9 @@ export class UsersEntity {
   collaboratorId: string;
 
   @Column()
+  profileId: string;
+
+  @Column()
   password: string;
 
   @CreateDateColumn({ name: 'created_at' })

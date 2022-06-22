@@ -39,6 +39,16 @@ export class UsersService {
     return await this.usersRepository.save(user) && await this.sendEmail(user.email, passwordd, user.login);
   }
 
+  async findForCollaborator(collaborator) {
+    return await this.usersRepository
+      .find({
+        select: ['id', 'login'],
+        where:
+          { collaboratorId: collaborator },
+      });
+
+  }
+
   async sendEmail(email: string, password: string, login: string): Promise<void> {
     await this.sendGrid.send({
       to: email,

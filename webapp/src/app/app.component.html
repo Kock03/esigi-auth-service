@@ -3,10 +3,7 @@
     <img src="../assets/logo/envolti.png" alt="" />
   </div>
   <div>
-    <button
-      mat-icon-button
-      *ngIf="sidenav.mode === 'over'"
-      (click)="sidenav.toggle()">
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
       <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
       <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
     </button>
@@ -15,32 +12,31 @@
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-    <img
-      class="avatar mat-elevation-z8"
+    <img class="avatar mat-elevation-z8"
       src="https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg" />
     <h4 class="name">{{"auth-service-list.user" | translate}}</h4>
     <p class="designation">
-      <button  class="buttom-edit" (click)="viewEdit()">
+      <button class="buttom-edit" (click)="viewEdit()">
         {{"auth-service-list.edit" | translate}}
       </button>
     </p>
 
     <mat-divider></mat-divider>
 
+    <button mat-button class="menu-button" (click)="openApp()">
+      <mat-icon>home</mat-icon>
+      <span>Início</span>
+    </button>
     <div *ngFor="let menu of menuList">
-      <button
-        [ngClass]="{
+      <button [ngClass]="{
           active: menu.action.startsWith(this.activeMenu)
-        }"
-        mat-button
-        class="menu-button"
-        (click)="navigate(menu.action)">
+        }" mat-button class="menu-button" (click)="navigate(menu.action)">
         <mat-icon>{{ menu.icon }}</mat-icon>
         <span>{{ menu.name }}</span>
       </button>
     </div>
 
-    <button mat-button class="menu-button logout">
+    <button mat-button class="menu-button logout" (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
       <span>{{"app_component.logout_span" | translate}}</span>
     </button>

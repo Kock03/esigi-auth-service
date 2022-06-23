@@ -74,7 +74,7 @@ export class AppComponent {
   }
 
   openApp(): void {
-    location.replace(`http://localhost:3406/portal`);
+    location.replace(`http://192.168.8.184:3406/portal`);
   }
 
   logout(): void {

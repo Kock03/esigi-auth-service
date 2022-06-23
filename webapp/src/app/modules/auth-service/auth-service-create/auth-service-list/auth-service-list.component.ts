@@ -21,7 +21,7 @@ export interface IProfile {
   name: string;
 }
 
-export interface IUser{
+export interface IUser {
   id: string
   userId: string
 }
@@ -34,7 +34,7 @@ export interface IUser{
 export class AuthServiceListComponent implements OnInit {
   filteredCollaboratorList = new MatTableDataSource();
 
-  @ViewChild('filter', {static: true}) filter!: ElementRef;
+  @ViewChild('filter', { static: true }) filter!: ElementRef;
 
   displayedCollaborator: string[] = [
     'collaborator',
@@ -48,9 +48,9 @@ export class AuthServiceListComponent implements OnInit {
 
   profiles!: IProfile[] | any[];
   filteredProfileList: any;
-  filteredProfiles?: any[]; 
+  filteredProfiles?: any[];
 
-  users!: IUser[] | any[];  
+  users!: IUser[] | any[];
   filteredUserList: any;
 
   constructor(
@@ -79,6 +79,7 @@ export class AuthServiceListComponent implements OnInit {
     if (ev.value == 3) {
       return (this.filteredProfileList = this.profiles =
         await this.profileProvider.findInactive());
+
     }
   }
 
@@ -86,25 +87,25 @@ export class AuthServiceListComponent implements OnInit {
     try {
       this.collaborators = await this.collaboratorProvider.findByName(query);
       console.log(this.collaborators)
-    } catch(error) {
+    } catch (error) {
       console.error(error);
     }
   }
 
   initFilter() {
     fromEvent(this.filter.nativeElement, 'keyup')
-    .pipe(debounceTime(200), distinctUntilChanged())
+      .pipe(debounceTime(200), distinctUntilChanged())
 
-    .subscribe((res) => {
-      this.filteredCollaboratorList.data = this.collaborators.filter(
-        (collaborator) =>
-        collaborator.firstNameCorporateName
-            .toLocaleLowerCase()
-            .includes(this.filter.nativeElement.value.toLocaleLowerCase())
-      )
-      const params = `firstNameCorporateName=${this.filter.nativeElement.value}`;
-      this.searchCollaborators(params);
-    });
+      .subscribe((res) => {
+        this.filteredCollaboratorList.data = this.collaborators.filter(
+          (collaborator) =>
+            collaborator.firstNameCorporateName
+              .toLocaleLowerCase()
+              .includes(this.filter.nativeElement.value.toLocaleLowerCase())
+        )
+        const params = `firstNameCorporateName=${this.filter.nativeElement.value}`;
+        this.searchCollaborators(params);
+      });
   }
 
   createCollaborator() {

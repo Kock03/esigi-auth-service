@@ -21,7 +21,7 @@ export class UserService {
         // localStorage.removeItem('xsrfToken');
         this.loggedChanged.next(false);
         this.isLogged = false;
-        location.replace('http://localhost:3406/login');
+        location.replace('http://192.168.8.184:3406/login');
     }
 
     isUserLoggedIn(): Subject<boolean> {

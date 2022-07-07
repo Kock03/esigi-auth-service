@@ -97,7 +97,8 @@
         </form>
     </div>
     <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
-        <button mat-flat-button color="primary" (click)="saveCollaborator()">
+        <button mat-flat-button color="primary" (click)="saveCollaborator()"
+            [disabled]="collaboratorProfileForm.invalid">
             {{ "auth-service-list.button_save" | translate }}
         </button>
     </div>

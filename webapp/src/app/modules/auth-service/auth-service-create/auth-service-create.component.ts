@@ -218,16 +218,24 @@ export class AuthServiceCreateComponent implements OnInit {
 
   initForm() {
     this.collaboratorProfileForm = this.fb.group({
-      collaboratorId: [null],
-      email: [null],
-      phoneNumber: [null],
-      ddd: [null],
-      profileId: [null],
-      login: [null],
-      password: [null],
-      userId: [null],
+      collaboratorId: [null, Validators.required],
+      email: [null, Validators.required],
+      phoneNumber: [null, Validators.required],
+      ddd: [null, Validators.required],
+      profileId: [null, Validators.required],
+      login: [null, Validators.required],
+      password: [null, Validators.required],
+      userId: [null, Validators.required],
+
 
     });
+
+
+    if (this.collaboratorProfileForm.controls['profileId'].value === null) {
+      this.collaboratorProfileForm.controls['profileId'].removeValidators(Validators.required);
+    } else if (this.collaboratorProfileForm.controls['password'].value === null) {
+      this.collaboratorProfileForm.controls['password'].removeValidators(Validators.required);
+    }
 
     this.collaboratorControl.valueChanges.subscribe((res) => {
       if (res && res.id) {

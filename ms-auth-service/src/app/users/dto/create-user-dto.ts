@@ -11,6 +11,9 @@ export class CreateUserDto {
   email: string;
 
   @IsNotEmpty()
+  login: string;
+
+  @IsNotEmpty()
   collaboratorId: string;
 
   @IsNotEmpty()

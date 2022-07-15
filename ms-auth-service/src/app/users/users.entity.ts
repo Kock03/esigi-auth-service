@@ -8,6 +8,8 @@ import {
   DeleteDateColumn,
 } from 'typeorm';
 import { hashSync } from 'bcrypt';
+import { IProfile } from './_model/profile.model';
+import { ICollaborator } from './_model/collaborator.model';
 
 @Entity({ name: 'users' })
 export class UsersEntity {
@@ -48,4 +50,10 @@ export class UsersEntity {
   hasPassword() {
     this.password = hashSync(this.password, 10);
   }
+
+  profile: IProfile[];
+
+  collaborator: ICollaborator;
+
+
 }

@@ -21,6 +21,16 @@ export class UserProvider {
         });
     }
 
+    findAll(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.apiGateway
+                .get(environment.AUTH_SERVICE_MS + 'users')
+                .subscribe((response: HttpResponse<any>) => {
+                    resolve(response.body);
+                }, reject);
+        });
+    }
+
     findOne(collaborator: string) {
         return new Promise((resolve, reject) => {
             this.apiGateway

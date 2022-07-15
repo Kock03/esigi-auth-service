@@ -13,6 +13,7 @@ export interface ICollaborator {
   email: string;
   login: string;
   password: string;
+  office: string;
 }
 
 
@@ -43,12 +44,13 @@ export class AuthServiceListComponent implements OnInit {
     'icon',
   ];
 
-  Collaborator: any;
+  Collaborator!: ICollaborator;
   collaborators!: ICollaborator[] | any[];
 
   profiles!: IProfile[] | any[];
   filteredProfileList: any;
   filteredProfiles?: any[];
+
 
   users!: IUser[] | any[];
   filteredUserList: any;
@@ -61,9 +63,7 @@ export class AuthServiceListComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    this.getCollaboratorList();
-    this.getProfileList();
-    // this.getUserList();
+    this.getUserList();
     // this.initFilter();
   }
 
@@ -129,9 +129,9 @@ export class AuthServiceListComponent implements OnInit {
       await this.profileProvider.shortListProfile();
   }
 
-  // async getUserList(){
-  //   this.filteredUserList = this.users =
-  //     await this.userProvider.shortListUser()
-  // }
+  async getUserList() {
+    this.filteredUserList = this.users =
+      await this.userProvider.findAll();
+  }
 
 }

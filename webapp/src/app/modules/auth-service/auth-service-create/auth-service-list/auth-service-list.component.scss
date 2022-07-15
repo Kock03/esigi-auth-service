@@ -16,6 +16,11 @@
             white-space: nowrap;
             overflow: hidden;
         }
+
+    }
+
+    .information span {
+        font-size: 22px;
     }
 
     .new-btn {
@@ -35,7 +40,7 @@
         }
     }
 
-    .mat-flat-button{
+    .mat-flat-button {
         background: #673ab7;
     }
 
@@ -43,4 +48,7 @@
     .mat-sort-header-arrow {
         color: white !important;
     }
+
+
+
 }

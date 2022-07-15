@@ -231,10 +231,10 @@ export class AuthServiceCreateComponent implements OnInit {
     });
 
 
-    if (this.collaboratorProfileForm.controls['profileId'].value === null) {
-      this.collaboratorProfileForm.controls['profileId'].removeValidators(Validators.required);
-    } else if (this.collaboratorProfileForm.controls['password'].value === null) {
+    if (this.profileControl.valueChanges) {
       this.collaboratorProfileForm.controls['password'].removeValidators(Validators.required);
+    } else if (this.profileControl.valueChanges === undefined) {
+      this.collaboratorProfileForm.controls['profileId'].removeValidators(Validators.required);
     }
 
     this.collaboratorControl.valueChanges.subscribe((res) => {

@@ -21,29 +21,29 @@
     </div>
 
     <div class="envolti-table mat-elevation-z8" fxLayout="column">
-        <table mat-table [dataSource]="filteredCollaboratorList">
+        <table mat-table [dataSource]="filteredUserList" class="table">
             <ng-container matColumnDef="collaborator">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by collaborator">
                     {{"auth-service-list.user" | translate}}
                 </th>
-                <td mat-cell *matCellDef="let collaborator">
-                    {{ collaborator.firstNameCorporateName }}
-                    {{ collaborator.lastNameFantasyName }}
-                </td>
-                <td mat-cell *matCellDef="let profile">
-                    {{ profile.name }}
-                </td>
-                <td mat-cell *matCellDef="let profile">
-                    {{ profile.email }}
+                <br>
+                <td mat-cell class="information" *matCellDef="let user">
+                    <br />
+                    <span>{{ user.collaborator.firstNameCorporateName }} {{
+                        user.collaborator.lastNameFantasyName}}</span>
+                    <br />
+                    {{ user.collaborator.office }}
+                    <br />
+                    {{ user.collaborator.login }}
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="permissions">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by admissionDate">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by permissions">
                     {{"auth-service-list.permissions" | translate}}
                 </th>
-                <td mat-cell *matCellDef="let collaborator">
-                    {{ collaborator.admissionDate | date: "dd/MM/yyyy" }}
+                <td mat-cell class="information" *matCellDef="let user">
+                    <span>{{ user.profile.name }}</span>
                 </td>
             </ng-container>
 
@@ -51,11 +51,11 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status">
                     {{"auth-service-list.filter.active" | translate}}
                 </th>
-                <td mat-cell *matCellDef="let collaborator">
-                    {{ collaborator.active == true ? "Ativo" : "Inativo" }}
+                <td mat-cell class="information" *matCellDef="let user">
+                    <span> {{ user.collaborator.inactive == 1 ? "Inativo" : "Ativo" }}</span>
                 </td>
             </ng-container>
-
+            <hr size="10" width="50%" align="center" noshade>
             <ng-container matColumnDef="icon">
                 <th mat-header-cell *matHeaderCellDef clas="icon-add" style="text-align: end">
                     <button class="edit-button" mat-flat-button color="primary" (click)="createCollaborator()">

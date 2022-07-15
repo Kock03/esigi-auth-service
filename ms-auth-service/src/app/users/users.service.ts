@@ -1,8 +1,8 @@
 import { UpdateUserDto } from './dto/update-user-dto';
 import { CreateUserDto } from './dto/create-user-dto';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { HttpService, Injectable, NotFoundException } from '@nestjs/common';
 
-import { FindConditions, FindOneOptions, Repository } from 'typeorm';
+import { FindConditions, FindManyOptions, FindOneOptions, Repository } from 'typeorm';
 import { UsersEntity } from './users.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { SendGridService } from '@anchan828/nest-sendgrid';
@@ -12,15 +12,74 @@ export class UsersService {
   constructor(
     @InjectRepository(UsersEntity)
     private readonly usersRepository: Repository<UsersEntity>,
-    private readonly sendGrid: SendGridService
+    private readonly sendGrid: SendGridService,
+    private httpService: HttpService,
   ) { }
 
 
   async findAll() {
-    return await this.usersRepository.find({
-      select: ['id', 'firstName', 'lastName', 'email'],
-    });
+    const options: FindManyOptions = {
+      order: { createdAt: 'DESC' },
+    };
+    try {
+      const users = await this.usersRepository.find(options);
+
+      const collaboratorIdList = users.map((user) => {
+        return user.collaboratorId;
+      });
+
+      const collaborators = await this.httpService
+        .post('http://localhost:3501/api/v1/collaborators/list', {
+          idList: collaboratorIdList,
+        })
+        .toPromise();
+
+      if (collaborators.data) {
+        users.map((user) => {
+          const collaborator = collaborators.data.find(
+            (collaborator) => collaborator.id === user.collaboratorId);
+          user.collaborator = {
+            firstNameCorporateName: collaborator.firstNameCorporateName,
+            lastNameFantasyName: collaborator.lastNameFantasyName,
+            office: collaborator.office,
+            login: collaborator.login,
+            inactive: collaborator.inactive,
+          };
+          return user;
+        })
+      }
+      const profileIdList = users.map((user) => {
+        return user.profileId;
+      });
+      const profiles = await this.httpService
+        .post('http://localhost:3507/api/v1/profiles/list', {
+          idList: profileIdList,
+        })
+        .toPromise();
+
+      if (profiles.data) {
+        users.map((user) => {
+          const profileFind = profiles.data.find(
+            (profile) => profile.id === user.profileId);
+          console.log(user.profile)
+          user.profile.forEach((profile) => {
+            profile.name = profileFind.name
+          });
+          return user;
+        })
+
+      } else {
+        return users;
+      }
+
+      return users;
+    } catch (error) {
+      console.log(error)
+      throw new NotFoundException();
+    }
   }
+
+
 
   async findOneOrFail(
     conditions: FindConditions<UsersEntity>,

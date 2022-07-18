@@ -41,7 +41,6 @@ export interface IUser {
   encapsulation: ViewEncapsulation.None
 })
 export class AuthServiceCreateComponent implements OnInit {
-  @Input('form') collaboratorProfileForm!: FormGroup;
   @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   show: boolean = false
@@ -53,14 +52,14 @@ export class AuthServiceCreateComponent implements OnInit {
   collaboratorId!: string | null;
   filteredCollaborators?: any[];
   login!: string | null;
-
+  collaboratorProfileForm!: FormGroup;
   profileControl = new FormControl();
   profile!: IProfile;
   profiles!: IProfile[] | any[];
   profileValid: boolean = false;
   filteredProfileList: any;
   filteredProfiles?: any[];
-
+  profileEmpty: boolean = true;
   userControl = new FormControl();
   userId!: any;
   dataUser: any;
@@ -83,6 +82,7 @@ export class AuthServiceCreateComponent implements OnInit {
     this.getProfileList();
     this.initFilter();
     this.initFilterProfile();
+    console.log(this.profileControl)
   }
 
   async getCollaboratorList() {
@@ -99,7 +99,6 @@ export class AuthServiceCreateComponent implements OnInit {
     let data = this.collaboratorProfileForm.getRawValue();
     let id = data.profileId.id;
     if (data.password === null) {
-
       try {
         const user = await this.userProvider.update(
           this.userId, { profileId: id }
@@ -108,9 +107,10 @@ export class AuthServiceCreateComponent implements OnInit {
         this.snackbarService.successMessage('Informações alteradas Com Sucesso');
       }
       catch (err) {
+        this.snackbarService.showError('Campos inválidos');
         console.log(err)
       }
-    } else {
+    } else if (id !== null) {
       try {
         const user = await this.userProvider.update(
           this.userId, { password: data.password, profileId: id }
@@ -120,8 +120,12 @@ export class AuthServiceCreateComponent implements OnInit {
 
       }
       catch (err) {
+        this.snackbarService.showError('Campos inválidos');
         console.log(err)
       }
+    } else {
+      this.snackbarService.showError('Campos inválidos');
+
     }
 
   }
@@ -224,7 +228,7 @@ export class AuthServiceCreateComponent implements OnInit {
       ddd: ['', Validators.required],
       profileId: [''],
       login: ['', Validators.required],
-      password: ['', Validators.required, Validators.minLength(8), Validators.maxLength(50),],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(50)]],
       userId: ['', Validators.required],
 
     });
@@ -254,6 +258,10 @@ export class AuthServiceCreateComponent implements OnInit {
         this.collaboratorProfileForm.controls['profileId'].setValue({ id: res.id }, {
           emitEvent: true,
         });
+        if (res.id !== '') {
+          this.profileEmpty = false;
+        }
+        console.log(res);
       }
     });
 

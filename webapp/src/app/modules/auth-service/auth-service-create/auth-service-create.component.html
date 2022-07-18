@@ -1,11 +1,11 @@
-<div id="collaboratorRegisterProfile" class="page" fxLayout="column">
+<div id="collaboratorRegisterProfile" class="page" fxLayout="column" *ngIf="collaboratorProfileForm">
     <div class="back" fxLayout="row" fxLayoutAlign="start center">
         <button mat-button class="btn-arrow-back" color="primary" (click)="listCollaborator()">
             <mat-icon>chevron_left</mat-icon>
         </button>
-        <h2 class="title">{{ "auth-service-list.collaborators" | translate }}</h2>
     </div>
-    <div class="content-scroll" *ngIf="collaboratorProfileForm">
+    <div class="content-scroll">
+        <h1 style="width: 100%;">Cadastro de Perfil</h1>
         <form (submit)="next()" [formGroup]="collaboratorProfileForm" fxLayout="column" class="form-control">
             <div fxFlex="100" fxLayoutGap="16px">
                 <mat-form-field fxFlex="50" class="example-full-width" appearance="outline">
@@ -97,7 +97,8 @@
         </form>
     </div>
     <div class="navigation-buttons" fxLayoutAlign="center end" fxLayoutGap="16px">
-        <button mat-flat-button [disabled]="collaboratorProfileForm.invalid" color="primary"
+        <button mat-flat-button
+            [disabled]="collaboratorProfileForm.controls['password'].invalid && profileEmpty === true" color="primary"
             (click)="saveCollaborator()">
             {{ "auth-service-list.button_save" | translate }}
         </button>

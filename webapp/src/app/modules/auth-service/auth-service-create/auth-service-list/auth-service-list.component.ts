@@ -63,8 +63,7 @@ export class AuthServiceListComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    this.getUserList();
-    // this.initFilter();
+    await this.getUserList();
   }
 
   async selectList(ev: any) {
@@ -112,12 +111,6 @@ export class AuthServiceListComponent implements OnInit {
     this.router.navigate(['autorizacao/novo']);
   }
 
-  // async deleteCollaborator(collaboratorId: any) {
-  //   const collaborators = await this.collaboratorProvider.destroy(
-  //     collaboratorId
-  //   );
-  //   this.getCollaboratorList();
-  // }
 
   async getCollaboratorList() {
     this.filteredCollaboratorList = this.collaborators =

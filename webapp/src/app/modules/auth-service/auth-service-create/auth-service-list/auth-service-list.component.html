@@ -23,7 +23,8 @@
     <div class="envolti-table mat-elevation-z8" fxLayout="column">
         <table mat-table [dataSource]="filteredUserList" class="table">
             <ng-container matColumnDef="collaborator">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by collaborator">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by collaborator"
+                    fxLayout="center" style="margin-top:17px; margin-left: 50px;">
                     {{"auth-service-list.user" | translate}}
                 </th>
                 <br>
@@ -37,23 +38,30 @@
                     {{ user.collaborator.login }}
                 </td>
             </ng-container>
-
             <ng-container matColumnDef="permissions">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by permissions">
                     {{"auth-service-list.permissions" | translate}}
                 </th>
                 <td mat-cell class="information" *matCellDef="let user">
-                    <span>{{ user.profile.name }}</span>
+                    <span *ngIf="user.profile">{{ user.profile.name }}</span>
                 </td>
             </ng-container>
 
             <ng-container matColumnDef="status">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status">
+
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status"
+                    fxLayout="center" style="margin-top:17px; margin-left: 50px">
                     {{"auth-service-list.filter.active" | translate}}
                 </th>
                 <td mat-cell class="information" *matCellDef="let user">
-                    <span> {{ user.collaborator.inactive == 1 ? "Inativo" : "Ativo" }}</span>
+                    <div
+                        [ngStyle]="user.collaborator.inactive == 1?{'background-color': '#DCDCDC;', 'border-radius':'35px;', 'max-width': '59%;','height': '35px;', 'color':'#A9A9A9;','border':' 1px solid #A9A9A9;','text-align':'center','padding':'5px'} : {'background-color': '#E0FFFF;', 'border-radius':'35px;', 'max-width': '59%;','height': '35px;', 'color':'#00BFFF;','border':' 1px solid #00BFFF;','text-align':'center','padding':'5px'} ">
+                        <span>{{ user.collaborator.inactive == 1 ? "Inativo" : "Ativo" }}</span>
+                    </div>
+
                 </td>
+
+
             </ng-container>
             <hr size="10" width="50%" align="center" noshade>
             <ng-container matColumnDef="icon">

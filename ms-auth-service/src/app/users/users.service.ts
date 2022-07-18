@@ -59,19 +59,21 @@ export class UsersService {
 
       if (profiles.data) {
         users.map((user) => {
-          const profileFind = profiles.data.find(
-            (profile) => profile.id === user.profileId);
-          console.log(user.profile)
-          user.profile.forEach((profile) => {
-            profile.name = profileFind.name
-          });
-          return user;
-        })
+          if (user.profileId != undefined) {
+            const profileFind = profiles.data.find(
+              (profile) => profile.id === user.profileId);
+            user.profile = {
+              name: profileFind.name
+            };
+            return user;
+          } else {
+            return user;
+          }
 
+        })
       } else {
         return users;
       }
-
       return users;
     } catch (error) {
       console.log(error)

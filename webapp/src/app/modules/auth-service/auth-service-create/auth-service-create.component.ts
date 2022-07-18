@@ -218,24 +218,16 @@ export class AuthServiceCreateComponent implements OnInit {
 
   initForm() {
     this.collaboratorProfileForm = this.fb.group({
-      collaboratorId: [null, Validators.required],
-      email: [null, Validators.required],
-      phoneNumber: [null, Validators.required],
-      ddd: [null, Validators.required],
-      profileId: [null, Validators.required],
-      login: [null, Validators.required],
-      password: [null, Validators.required],
-      userId: [null, Validators.required],
-
+      collaboratorId: ['', Validators.required],
+      email: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      ddd: ['', Validators.required],
+      profileId: [''],
+      login: ['', Validators.required],
+      password: ['', Validators.required, Validators.minLength(8), Validators.maxLength(50),],
+      userId: ['', Validators.required],
 
     });
-
-
-    if (this.profileControl.valueChanges) {
-      this.collaboratorProfileForm.controls['password'].removeValidators(Validators.required);
-    } else if (this.profileControl.valueChanges === undefined) {
-      this.collaboratorProfileForm.controls['profileId'].removeValidators(Validators.required);
-    }
 
     this.collaboratorControl.valueChanges.subscribe((res) => {
       if (res && res.id) {
@@ -266,6 +258,9 @@ export class AuthServiceCreateComponent implements OnInit {
     });
 
 
+    if (this.profileValid = true) {
+      this.collaboratorProfileForm.controls['password'].removeValidators(Validators.required);
+    }
 
   }
 

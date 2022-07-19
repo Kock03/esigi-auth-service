@@ -1,10 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, fromEvent } from 'rxjs';
 import { CollaboratorProvider } from 'src/providers/collaborator.provider';
 import { ProfileProvider } from 'src/providers/profile.provider';
 import { UserProvider } from 'src/providers/user.provider';
+import { ConfirmDialogService } from 'src/services/confirm-dialog.service';
+import { AuthServiceCreateComponent } from '../auth-service-create/auth-service-create.component';
 
 export interface ICollaborator {
   id: string;
@@ -60,6 +63,8 @@ export class AuthServiceListComponent implements OnInit {
     private collaboratorProvider: CollaboratorProvider,
     private profileProvider: ProfileProvider,
     private userProvider: UserProvider,
+    private dialogService: ConfirmDialogService,
+    public dialog: MatDialog,
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -111,15 +116,16 @@ export class AuthServiceListComponent implements OnInit {
     this.router.navigate(['autorizacao/novo']);
   }
 
-
-  async getCollaboratorList() {
-    this.filteredCollaboratorList = this.collaborators =
-      await this.collaboratorProvider.shortListCollaborators();
-  }
-
-  async getProfileList() {
-    this.filteredProfileList = this.profiles =
-      await this.profileProvider.shortListProfile();
+  openDialog() {
+    const dialogRef = this.dialog.open(AuthServiceCreateComponent, {
+      width: '700px',
+      height: '550px',
+    });
+    dialogRef.afterClosed().subscribe(permission => {
+      if (permission) {
+        this.getUserList();
+      }
+    });
   }
 
   async getUserList() {

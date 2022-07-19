@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthServiceCreateComponent } from './auth-service-create.component';
+import { AuthServiceCreateComponent } from './auth-service-create/auth-service-create.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthServiceListComponent } from './auth-service-list/auth-service-list.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -17,15 +17,12 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { SnackBarComponent } from 'src/app/components/snack-bar/snack-bar.component';
 import { SnackBarService } from 'src/services/snackbar.service';
 import { ConfirmDialogService } from 'src/services/confirm-dialog.service';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
   {
     path: 'lista',
     component: AuthServiceListComponent,
-  },
-  {
-    path: 'novo',
-    component: AuthServiceCreateComponent,
   },
 ];
 
@@ -48,6 +45,7 @@ const routes: Routes = [
     MatInputModule,
     MatIconModule,
     NgxMaskModule,
+    MatDialogModule,
     MatAutocompleteModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

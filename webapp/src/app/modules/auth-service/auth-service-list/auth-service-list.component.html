@@ -66,14 +66,11 @@
             <hr size="10" width="50%" align="center" noshade>
             <ng-container matColumnDef="icon">
                 <th mat-header-cell *matHeaderCellDef clas="icon-add" style="text-align: end">
-                    <button class="edit-button" mat-flat-button color="primary" (click)="createCollaborator()">
+                    <button class="edit-button" mat-flat-button color="primary" (click)=" openDialog()">
                         <mat-icon>add</mat-icon>
                     </button>
                 </th>
                 <td class="button-tab" mat-cell *matCellDef="let collaborator" style="text-align: end">
-                    <button class="table-button" mat-button>
-                        <mat-icon>edit</mat-icon>
-                    </button>
                     <button class="table-button" mat-button>
                         <mat-icon>delete</mat-icon>
                     </button>

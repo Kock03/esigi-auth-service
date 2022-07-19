@@ -25,7 +25,6 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { AuthServiceCreateComponent } from './modules/auth-service/auth-service-create/auth-service-create.component';
-import { AuthServiceListComponent } from './modules/auth-service/auth-service-create/auth-service-list/auth-service-list.component';
 import { CommonModule } from '@angular/common';
 import { SnackBarComponent } from './components/snack-bar/snack-bar.component';
 import { SnackBarService } from 'src/services/snackbar.service';

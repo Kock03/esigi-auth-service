@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { CollaboratorProvider } from 'src/providers/collaborator.provider';
@@ -74,6 +75,9 @@ export class AuthServiceCreateComponent implements OnInit {
     private profileProvider: ProfileProvider,
     private userProvider: UserProvider,
     private snackbarService: SnackBarService,
+    public dialogRef: MatDialogRef<AuthServiceCreateComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+
   ) { }
 
   ngOnInit(): void {
@@ -117,7 +121,6 @@ export class AuthServiceCreateComponent implements OnInit {
         );
         this.router.navigate(['autorizacao/lista']);
         this.snackbarService.successMessage('Informações alteradas Com Sucesso');
-
       }
       catch (err) {
         this.snackbarService.showError('Campos inválidos');
@@ -151,11 +154,6 @@ export class AuthServiceCreateComponent implements OnInit {
 
   passwordShow() {
     this.show = !this.show;
-  }
-
-  listCollaborator() {
-    this.router.navigate(['autorizacao/lista']);
-    sessionStorage.clear();
   }
 
   private initFilter() {
@@ -217,6 +215,10 @@ export class AuthServiceCreateComponent implements OnInit {
     this.filteredProfiles = await this.profileProvider.findByName(
       params
     );
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 

@@ -28,7 +28,6 @@ export class AuthService {
 
   async login(user: UsersEntity) {
     const payload = { sud: user.id, login: user.login };
-
     return {
       token: this.jwtService.sign(payload),
     };
@@ -38,6 +37,6 @@ export class AuthService {
     const verify = this.jwtService.verify(jwt);
     if (verify) {
       return true;
-    } 
+    }
   }
 }

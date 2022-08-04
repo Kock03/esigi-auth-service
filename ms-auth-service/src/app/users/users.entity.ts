@@ -51,6 +51,8 @@ export class UsersEntity {
     this.password = hashSync(this.password, 10);
   }
 
+
+
   profile: IProfile;
 
   collaborator: ICollaborator;

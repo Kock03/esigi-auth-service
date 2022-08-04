@@ -1,7 +1,7 @@
 import { UpdateUserDto } from './dto/update-user-dto';
 import { CreateUserDto } from './dto/create-user-dto';
 import { HttpService, Injectable, NotFoundException } from '@nestjs/common';
-
+import { hashSync } from 'bcrypt';
 import { FindConditions, FindManyOptions, FindOneOptions, Repository } from 'typeorm';
 import { UsersEntity } from './users.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -76,7 +76,6 @@ export class UsersService {
       }
       return users;
     } catch (error) {
-      console.log(error)
       throw new NotFoundException();
     }
   }
@@ -129,10 +128,10 @@ export class UsersService {
       const user = await this.usersRepository.findOneOrFail({
         id,
       });
+      data.password = hashSync(user.password, 10);
     } catch {
       throw new NotFoundException();
     }
-
     return await this.usersRepository.save({ id: id, ...data });
   }
 

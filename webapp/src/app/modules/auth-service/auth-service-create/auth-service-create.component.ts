@@ -86,7 +86,6 @@ export class AuthServiceCreateComponent implements OnInit {
     this.getProfileList();
     this.initFilter();
     this.initFilterProfile();
-    console.log(this.profileControl)
   }
 
   async getCollaboratorList() {
@@ -144,10 +143,8 @@ export class AuthServiceCreateComponent implements OnInit {
 
       this.userId = res[0].id;
       this.log = res[0].login;
-      console.log(this.log);
       this.collaboratorProfileForm.controls['login'].setValue(this.log)
       this.collaboratorProfileForm.controls['userId'].setValue(this.userId)
-      console.log(this.userId)
     });
 
   }
@@ -263,7 +260,6 @@ export class AuthServiceCreateComponent implements OnInit {
         if (res.id !== '') {
           this.profileEmpty = false;
         }
-        console.log(res);
       }
     });
 

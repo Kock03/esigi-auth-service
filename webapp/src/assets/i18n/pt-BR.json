@@ -28,7 +28,8 @@
   },
   "validators": {
     "validator-required": "Campo Obrigatório",
-    "validator-email": "Email inválido"
+    "validator-email": "Email inválido",
+    "select-option": "Selecione uma opção"
   },
   "generic": {
     "cancel_button": "Cancelar",

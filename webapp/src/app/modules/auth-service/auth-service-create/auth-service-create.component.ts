@@ -1,12 +1,14 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { CollaboratorProvider } from 'src/providers/collaborator.provider';
 import { ProfileProvider } from 'src/providers/profile.provider';
 import { UserProvider } from 'src/providers/user.provider';
+import { RequireMatch } from 'src/services/autocomplete.service';
 import { SnackBarService } from 'src/services/snackbar.service';
+
 
 
 export interface ICollaborator {
@@ -45,7 +47,7 @@ export class AuthServiceCreateComponent implements OnInit {
   @Output() onChange: EventEmitter<any> = new EventEmitter();
 
   show: boolean = false
-  collaboratorControl = new FormControl();
+  collaboratorControl = new FormControl('', [Validators.required, RequireMatch]);
   collaborator!: ICollaborator;
   collaborators!: ICollaborator[] | any[];
   collaboratorValid: boolean = false;
@@ -54,14 +56,14 @@ export class AuthServiceCreateComponent implements OnInit {
   filteredCollaborators?: any[];
   login!: string | null;
   collaboratorProfileForm!: FormGroup;
-  profileControl = new FormControl();
+  profileControl = new FormControl('', [Validators.required, RequireMatch]);
   profile!: IProfile;
   profiles!: IProfile[] | any[];
   profileValid: boolean = false;
   filteredProfileList: any;
   filteredProfiles?: any[];
   profileEmpty: boolean = true;
-  userControl = new FormControl();
+  userControl = new FormControl('', [Validators.required]);
   userId!: any;
   dataUser: any;
   user!: IUser;
@@ -86,7 +88,6 @@ export class AuthServiceCreateComponent implements OnInit {
     this.getProfileList();
     this.initFilter();
     this.initFilterProfile();
-    console.log(this.profileControl)
   }
 
   async getCollaboratorList() {
@@ -280,3 +281,7 @@ export class AuthServiceCreateComponent implements OnInit {
   }
 
 }
+function autocompleteObjectValidator(): ValidatorFn {
+  throw new Error('Function not implemented.');
+}
+

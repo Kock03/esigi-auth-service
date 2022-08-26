@@ -1,45 +1,59 @@
+
+
 <mat-toolbar fxLayoutAlign="space-between center">
-  <div>
-    <img src="../assets/logo/envolti.png" alt="" />
+  <div fxLayout="row" >
+    <img src="../assets/logo/logo-envolti-branca-roxo.png" alt="" />
+    <button mat-button class="menu-button-logout" (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>{{ "Logout" }}</span>
+    </button> 
   </div>
   <div>
-    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <button
+      mat-icon-button
+      *ngIf="sidenav.mode === 'over'"
+      (click)="sidenav.toggle()">
       <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
       <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
     </button>
   </div>
 </mat-toolbar>
 
+
 <mat-sidenav-container>
-  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-    <img class="avatar mat-elevation-z8"
-      src="https://st.depositphotos.com/1734074/4228/v/450/depositphotos_42286141-stock-illustration-vector-man-with-mustache-in.jpg" />
-    <h4 class="name">{{"auth-service-list.user" | translate}}</h4>
-    <p class="designation">
-      <button class="buttom-edit" (click)="viewEdit()">
-        {{"auth-service-list.edit" | translate}}
-      </button>
-    </p>
+  
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8" 
+  [ngStyle]="openTree && {'width': '100px'} || {'width': '250px'}">
+    <img *ngIf="openTree != true"
+      class="avatar mat-elevation-z8"
+      src="../assets/icons/avatar-astronauta.png" />
+    <h2 *ngIf="openTree != true" class="name">Usuário</h2>
+    <p *ngIf="openTree != true"  class="designation">Função</p>
 
-    <mat-divider></mat-divider>
+    <mat-divider *ngIf="openTree != true"></mat-divider>
 
-    <button mat-button class="menu-button" (click)="openApp()">
-      <mat-icon>home</mat-icon>
-      <span>Início</span>
+    <div class="design" [ngStyle]="openTree && {'margin-top': '290px'} || {'margin-top': '60px'}" >
+    <div class="btn-menu"  
+    [ngStyle]="openTree && {'margin-left': '1px'} || {'margin-left': '20px'}"
+   >
+    <button class="btn-menu" mat-button class="menu-button"  (click)="openApp()">
+      <mat-icon [ngStyle]="openTree && {'margin-left': '15px'} || {'margin-left': '3px'}" >home</mat-icon>
+      <span *ngIf="openTree != true" >Início</span>
     </button>
-    <div *ngFor="let menu of menuList">
-      <button [ngClass]="{
-          active: menu.action.startsWith(this.activeMenu)
-        }" mat-button class="menu-button" (click)="navigate(menu.action)">
-        <mat-icon>{{ menu.icon }}</mat-icon>
-        <span>{{ menu.name }}</span>
-      </button>
     </div>
-
-    <button mat-button class="menu-button logout" (click)="logout()">
-      <mat-icon>exit_to_app</mat-icon>
-      <span>{{"app_component.logout_span" | translate}}</span>
+    <div class="btn-menu" [ngStyle]="openTree && {'margin-left': '1px'} || {'margin-left': '20px'}">
+    <button [ngClass]="{'active': activeMenu == autorizacao}" class="btn-menu" mat-button class="menu-button"  (click)="navigator('autorizacao')" >
+      <mat-icon [ngStyle]="openTree && {'margin-left': '15px'} || {'margin-left': '3px'}">person</mat-icon>
+      <span *ngIf="openTree != true" >Perfil</span>
     </button>
+    </div>
+    <div class="btn-menu" [ngStyle]="openTree && {'margin-left': '1px'} || {'margin-left': '20px'}">
+    <button class="btn-menu" mat-button class="menu-button-more" (click)=recize() 
+    [ngStyle]="openTree && {'margin-left': '5px'} || {'margin-right': '25px'}">
+      <mat-icon class="btn-more" [ngStyle]="openTree && {'margin-top': '270px'} || {'margin-top': '220px'}">more_horiz</mat-icon>
+    </button>
+    </div>
+  </div>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="content">

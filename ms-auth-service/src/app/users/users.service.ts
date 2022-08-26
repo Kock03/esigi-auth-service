@@ -97,7 +97,8 @@ export class UsersService {
   async store(data: CreateUserDto) {
     const passwordd = data.password
     const user = this.usersRepository.create(data);
-    return await this.usersRepository.save(user) && await this.sendEmail(user.email, passwordd, user.login);
+    await this.sendEmail(user.email, passwordd, user.login);
+    return await this.usersRepository.save(user);
   }
 
   async findForCollaborator(collaborator) {

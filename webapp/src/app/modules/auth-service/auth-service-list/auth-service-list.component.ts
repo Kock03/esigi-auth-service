@@ -9,31 +9,10 @@ import { UserProvider } from 'src/providers/user.provider';
 import { ConfirmDialogService } from 'src/services/confirm-dialog.service';
 import { AuthServiceCreateComponent } from '../auth-service-create/auth-service-create.component';
 
-export interface ICollaborator {
-  id: string;
-  firstNameCorporateName: string;
-  lastNameCorporateName: string;
-  email: string;
-  login: string;
-  password: string;
-  office: string;
-}
-
-
-export interface IProfile {
-  id: string;
-  name: string;
-}
-
-export interface IUser {
-  id: string
-  userId: string
-}
-
 @Component({
   selector: 'app-auth-service-list',
   templateUrl: './auth-service-list.component.html',
-  styleUrls: ['./auth-service-list.component.scss']
+  styleUrls: ['./auth-service-list.component.scss'],
 })
 export class AuthServiceListComponent implements OnInit {
   filteredCollaboratorList = new MatTableDataSource();
@@ -47,16 +26,10 @@ export class AuthServiceListComponent implements OnInit {
     'icon',
   ];
 
-  Collaborator!: ICollaborator;
-  collaborators!: ICollaborator[] | any[];
-
-  profiles!: IProfile[] | any[];
-  filteredProfileList: any;
-  filteredProfiles?: any[];
-
-
-  users!: IUser[] | any[];
+  users!: any[];
   filteredUserList: any;
+  params: string = '';
+  select: number = 1;
 
   constructor(
     private router: Router,
@@ -64,33 +37,28 @@ export class AuthServiceListComponent implements OnInit {
     private profileProvider: ProfileProvider,
     private userProvider: UserProvider,
     private dialogService: ConfirmDialogService,
-    public dialog: MatDialog,
-  ) { }
+    public dialog: MatDialog
+  ) {}
 
   async ngOnInit(): Promise<void> {
     await this.getUserList();
+    this.initFilter();
   }
 
   async selectList(ev: any) {
-    if (ev.value == 1) {
-      return (this.filteredProfileList = this.profiles =
-        await this.profileProvider.findAll());
-    }
-    if (ev.value == 2) {
-      return (this.filteredProfileList = this.profiles =
-        await this.profileProvider.findActive());
-    }
-    if (ev.value == 3) {
-      return (this.filteredProfileList = this.profiles =
-        await this.profileProvider.findInactive());
-
-    }
+    this.select = ev.value;
+    this.searchUser();
   }
 
-  async searchCollaborators(query?: string) {
+  async searchUser() {
+    const data = {
+      firstName: this.params,
+      status: this.select,
+    };
     try {
-      this.collaborators = await this.collaboratorProvider.findByName(query);
-      console.log(this.collaborators)
+      this.filteredUserList = this.users = await this.userProvider.findByName(
+        data
+      );
     } catch (error) {
       console.error(error);
     }
@@ -101,14 +69,16 @@ export class AuthServiceListComponent implements OnInit {
       .pipe(debounceTime(200), distinctUntilChanged())
 
       .subscribe((res) => {
-        this.filteredCollaboratorList.data = this.collaborators.filter(
-          (collaborator) =>
-            collaborator.firstNameCorporateName
-              .toLocaleLowerCase()
-              .includes(this.filter.nativeElement.value.toLocaleLowerCase())
-        )
-        const params = `firstNameCorporateName=${this.filter.nativeElement.value}`;
-        this.searchCollaborators(params);
+        this.filteredUserList = this.users.filter((user) => {
+          user.firstName
+            .toLocaleLowerCase()
+            .includes(this.filter.nativeElement.value.toLocaleLowerCase());
+        });
+        this.params = this.filter.nativeElement.value;
+        this.searchUser();
+        if (this.filter.nativeElement.value === '') {
+          this.getUserList();
+        }
       });
   }
 
@@ -121,7 +91,7 @@ export class AuthServiceListComponent implements OnInit {
       width: '700px',
       height: '550px',
     });
-    dialogRef.afterClosed().subscribe(permission => {
+    dialogRef.afterClosed().subscribe((permission) => {
       if (permission) {
         this.getUserList();
       }
@@ -129,8 +99,6 @@ export class AuthServiceListComponent implements OnInit {
   }
 
   async getUserList() {
-    this.filteredUserList = this.users =
-      await this.userProvider.findAll();
+    this.filteredUserList = this.users = await this.userProvider.findAll();
   }
-
 }

@@ -31,13 +31,42 @@ export class UserProvider {
         });
     }
 
-    findOne(collaborator: string) {
+    findOne(users: string) {
         return new Promise((resolve, reject) => {
             this.apiGateway
-                .get(environment.AUTH_SERVICE_MS + 'users/find/:collaboratorId', { collaboratorId: collaborator })
+                .get(environment.AUTH_SERVICE_MS + 'users/find/:users', { users: users })
                 .subscribe((response: HttpResponse<any>) => {
                     resolve(response.body);
                 }, reject);
         });
     }
+
+    findActive(): Promise<any> {
+        return new Promise((resolve, reject) => {
+          this.apiGateway
+            .get(environment.AUTH_SERVICE_MS + 'users/list/active')
+            .subscribe((response: HttpResponse<any>) => {
+              resolve(response.body);
+            }, reject);
+        });
+      }
+    
+      findByName(body: any): Promise<any> {
+        return new Promise((resolve, reject) => {
+          this.apiGateway.post(environment.AUTH_SERVICE_MS + 'users/find/name', body)
+            .subscribe((response: HttpResponse<any>) => {
+              resolve(response.body);
+            }, reject);
+        });
+      }
+
+      findInactive(): Promise<any> {
+        return new Promise((resolve, reject) => {
+          this.apiGateway
+            .get(environment.AUTH_SERVICE_MS + 'users/list/inactive')
+            .subscribe((response: HttpResponse<any>) => {
+              resolve(response.body);
+            }, reject);
+        });
+      }
 }

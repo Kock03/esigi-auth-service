@@ -49,13 +49,13 @@
         <td mat-cell class="information" *matCellDef="let user">
           <br />
           <span
-            >{{ user.collaborator.firstNameCorporateName }}
-            {{ user.collaborator.lastNameFantasyName }}</span
+            >{{ user.firstName }}
+            {{ user.lastName }}</span
           >
           <br />
-          {{ user.collaborator.office }}
+          {{ user.office }}
           <br />
-          {{ user.collaborator.login }}
+          {{ user.login }}
         </td>
       </ng-container>
       <ng-container matColumnDef="permissions">
@@ -68,7 +68,7 @@
           {{ "auth-service-list.permissions" | translate }}
         </th>
         <td mat-cell class="information" *matCellDef="let user">
-          <span *ngIf="user.profile">{{ user.profile.name }}</span>
+          <span>{{ user.profileName }}</span>
         </td>
       </ng-container>
 
@@ -86,7 +86,7 @@
         <td mat-cell class="information" *matCellDef="let user">
           <div
             [ngStyle]="
-              user.collaborator.inactive == 1
+              user.inactive == 1
                 ? {
                     'background-color': '#DCDCDC;',
                     'border-radius': '35px;',
@@ -110,7 +110,7 @@
             "
           >
             <span>{{
-              user.collaborator.inactive == 1 ? "Inativo" : "Ativo"
+              user.inactive == 1 ? "Inativo" : "Ativo"
             }}</span>
           </div>
         </td>

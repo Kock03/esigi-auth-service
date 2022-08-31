@@ -55,4 +55,21 @@ export class UsersController {
   async destroy(@Param('id', new ParseUUIDPipe()) id: string) {
     await this.usersService.destroy(id);
   }
+
+  @Get('list/active')
+  async findActive() {
+    return await this.usersService.findActive();
+  }
+
+  
+  @Get('list/inactive')
+  async findInactive() {
+    return await this.usersService.findInactive();
+  }
+
+
+  @Post('find/name')
+  async findByName(@Body() body: any) {
+    return await this.usersService.findByName(body.firstName, body.status);
+  }
 }

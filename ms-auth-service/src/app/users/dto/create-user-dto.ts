@@ -14,7 +14,14 @@ export class CreateUserDto {
   login: string;
 
   @IsNotEmpty()
+  office: string;
+
+  @IsNotEmpty()
+  inactive: boolean;
+
+  @IsNotEmpty()
   collaboratorId: string;
+
 
   @IsNotEmpty()
   // @Matches(RegExHelper.password, {message: MessagesHelper.PASSWORD_INVALID})

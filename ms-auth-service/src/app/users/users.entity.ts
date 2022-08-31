@@ -26,13 +26,23 @@ export class UsersEntity {
   email: string;
 
   @Column()
+  collaboratorId: string;
+
+  @Column()
   login: string;
 
   @Column()
-  collaboratorId: string;
+  office: string;
+
+  @Column()
+  inactive: boolean;
 
   @Column({ nullable: true })
   profileId: string;
+
+  
+  @Column({ nullable: true })
+  profileName: string;
 
   @Column()
   password: string;

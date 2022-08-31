@@ -7,6 +7,9 @@ export class UpdateUserDto {
   profileId: string;
 
   @IsOptional()
+  profileName: string;
+
+  @IsOptional()
   password: string;
 
 

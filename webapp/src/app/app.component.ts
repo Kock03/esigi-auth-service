@@ -17,15 +17,10 @@ export class AppComponent {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 
-  menuList = [
+  openTree: boolean = false;
+  compare!: any
+  autorizacao: string = 'autorizacao'
 
-    {
-      name: 'Perfil',
-      icon: 'person',
-      selected: false,
-      action: 'autorizacao/lista',
-    },
-  ];
 
   collaboratorId!: string | null;
 
@@ -53,6 +48,10 @@ export class AppComponent {
     this.router.navigate(['edit/novo']);
   }
 
+  recize() {
+
+    this.openTree = this.openTree === true ? false : true;
+  }
 
 
   ngAfterViewInit() {
@@ -67,6 +66,15 @@ export class AppComponent {
         }
       });
     }, 50);
+  }
+
+  navigator(route: any) {
+    console.log("🚀 ~ file: app.component.ts ~ line 79 ~ AppComponent ~ navigator ~ route", route)
+    switch (route) {
+      case 'autorizacao':
+        this.router.navigate(['autorizacao/lista']);
+        break;
+    }
   }
 
   navigate(route: string) {

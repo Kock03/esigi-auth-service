@@ -1,91 +1,127 @@
-mat-toolbar {
-    background: #3f1870;
+
+  mat-toolbar {
+    background: #208fd8;
     color: white;
     height: 64px;
-  
+
     img {
       margin-top: 16px;
       width: 128px;
     }
   }
-  
+
   mat-sidenav {
     width: 224px;
-    background: #753bbd;
-    color: white;
+    background-image: url(../assets/icons/textura-sidenav.png);
     padding: 4px;
     text-align: center;
+    
   }
-  
+
   .content {
     height: calc(100% - 64px);
   }
-  
+
   mat-sidenav-container {
     height: calc(100vh - 64px);
   }
-  
-  .mat-drawer-content {
-    height: 100vh;
-  }
-  
-  .menu-button {
+
+  .menu-button-logout {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     font-size: 1rem;
+    margin-left: 1445px;
   
     mat-icon {
       margin-right: 8px;
     }
   }
-  
-  .buttom-edit {
-    background: none !important;
-    border: none;
-    padding: 0 !important;
-    font-size: 14px;
-    color: #fffdfd;
-    text-decoration: underline;
-    cursor: pointer;
+
+  .mat-drawer-content {
+    height: 100vh;
   }
+
+  .btn-menu {
+    padding-top: 20px;
+  }
+
+
+  .menu-button {
+    width: 100%;
+    max-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 20px;
+    border-radius: 15px;
+    height: 60px;
+    background-color: #208fd8;
+    // margin-left: 20px;
+
+    mat-icon {
+      margin-right: 8px;
+      color: rgb(248, 242, 242);
+    }
+  }
+
+  mat-icon {
+    color: rgb(248, 242, 242);
+  }
+
   
+
+  span{
+    color: rgb(248, 242, 242);
+    font-size: 22px;
+  }
+
   .menu-button:hover:not(.active) {
     background-color: #3f1870;
     transition: background-color 0.3s;
   }
-  
+
   .active {
-    background-color: #208fd8;
+    background-color: #3f1870;
   }
-  
+
   .logout {
     position: absolute;
     bottom: 0;
     margin-bottom: 8px;
     width: 212px;
   }
-  
+
   .avatar {
-    margin-top: 24px;
-    width: 100px;
-    height: 100px;
+    margin-top: 44px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
   }
-  
+
   .name {
-    margin-top: 8px;
-    font-weight: normal;
+    margin: 10px 0 5px;
+    font-size: 22px;
+    color: rgb(248, 242, 242);
+    
   }
-  
+
   .designation {
-    margin-top: 2px;
-    font-size: 0.7rem;
+    margin-top: 0 !important;
     color: lightgrey;
-  }
   
-  mat-divider {
-    margin: 16px 8px;
-    background-color: rgba(239, 244, 250, 0.863);
   }
+
+  mat-divider {
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: rgba(239, 244, 250, 0.863);
+    height: 6px;
+    border-radius: 10px;
+  }
+
+  // .btn-more {
+  //   background-color: rgba(239, 244, 250, 0.863);
+  // }

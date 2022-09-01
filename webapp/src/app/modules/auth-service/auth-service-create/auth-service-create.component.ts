@@ -208,18 +208,18 @@ export class AuthServiceCreateComponent implements OnInit {
     if (typeof user === 'string' && this.profiles) {
       return this.profiles.find((profile) => profile.id === user);
     }
-    return user && user.name ? user.name : '';
+    return user && user.firstName ? user.firstName : '';
   }
 
   private async _filter(name: string): Promise<void> {
-    const params = `firstNameCorporateName=${name}`;
+    const params = {firstNameCorporateName: name, status: 1};
     this.filteredCollaborators = await this.collaboratorProvider.findByName(
       params
     );
   }
 
   private async _filterProfile(name: string): Promise<void> {
-    const params = `name=${name}`;
+    const params = {firstName: name, status: 1};
     this.filteredProfiles = await this.profileProvider.findByName(params);
   }
 
@@ -279,7 +279,7 @@ export class AuthServiceCreateComponent implements OnInit {
     this.profileControl.valueChanges.subscribe((res) => {
       if (res && res.id) {
         this.collaboratorProfileForm.controls['profileName'].setValue(
-          { name: res.name },
+          { name: res.firstName },
           {
             emitEvent: true,
           }

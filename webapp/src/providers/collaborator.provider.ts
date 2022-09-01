@@ -42,14 +42,16 @@ export class CollaboratorProvider {
     });   
   }
 
-  findByName(query: any): Promise<any> {
+
+  findByName(body: any): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.apiGateway.get(environment.COLLABORATOR_MS + `collaborators/find/name?${query}`)
+      this.apiGateway.post(environment.COLLABORATOR_MS + 'collaborators/find/name', body)
         .subscribe((response: HttpResponse<any>) => {
           resolve(response.body);
         }, reject);
     });
   }
+
 
   create(id: string | null, body: any): Promise<any> {
     return new Promise((resolve, reject) => {

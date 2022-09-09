@@ -55,7 +55,7 @@
     </div>
   </div>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content [ngStyle]="openTree && {'margin-left': '100px'} || {'margin-left': '250px'}">
     <div class="content">
       <router-outlet></router-outlet>
     </div>

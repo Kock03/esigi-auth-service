@@ -5,7 +5,7 @@
   },
   "auth-service-list": {
     "profiles": "Cadastro de Perfil",
-    "search_collaborators": "Buscar Colaboradores",
+    "search_collaborators": "Buscar colaboradores",
     "filter": {
       "name": "Filtro",
       "all": "Todos",
@@ -23,11 +23,11 @@
     "profile": "Perfil",
     "login": "Login",
     "password": "Senha",
-    "optional_password": "Nova Senha",
+    "optional_password": "Nova senha",
     "button_save": "Salvar"
   },
   "validators": {
-    "validator-required": "Campo Obrigatório",
+    "validator-required": "Campo obrigatório",
     "validator-email": "Email inválido",
     "select-option": "Selecione uma opção"
   },

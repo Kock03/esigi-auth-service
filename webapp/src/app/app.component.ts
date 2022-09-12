@@ -19,7 +19,7 @@ export class AppComponent {
 
   openTree: boolean = false;
   compare!: any
-  autorizacao: string = 'autorizacao'
+  autorization: string = 'autorizacao'
 
 
   collaboratorId!: string | null;
@@ -71,7 +71,7 @@ export class AppComponent {
   navigator(route: any) {
     console.log("🚀 ~ file: app.component.ts ~ line 79 ~ AppComponent ~ navigator ~ route", route)
     switch (route) {
-      case 'autorizacao':
+      case 'autorization':
         this.router.navigate(['autorizacao/lista']);
         break;
     }

@@ -20,7 +20,7 @@ export class UsersService {
     private readonly usersRepository: Repository<UsersEntity>,
     private readonly sendGrid: SendGridService,
     private httpService: HttpService,
-  ) {}
+  ) { }
 
   async findAll() {
     const options: FindManyOptions = {
@@ -76,8 +76,8 @@ export class UsersService {
     email: string,
     password: string,
     login: string,
-  ): Promise<void> {
-    await this.sendGrid.send({
+  ) {
+    return await this.sendGrid.send({
       to: email,
       from: process.env.FROM_EMAIL,
       subject: 'Informações do login',

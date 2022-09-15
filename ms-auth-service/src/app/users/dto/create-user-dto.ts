@@ -8,10 +8,16 @@ export class CreateUserDto {
   lastName: string;
 
   @IsNotEmpty()
+  inactive: string;
+
+  @IsNotEmpty()
   email: string;
 
   @IsNotEmpty()
   login: string;
+
+  @IsNotEmpty()
+  office: string;
 
   @IsNotEmpty()
   collaboratorId: string;

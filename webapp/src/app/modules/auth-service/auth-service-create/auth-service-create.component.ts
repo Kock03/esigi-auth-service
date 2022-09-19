@@ -93,7 +93,7 @@ export class AuthServiceCreateComponent implements OnInit {
     private snackbarService: SnackBarService,
     public dialogRef: MatDialogRef<AuthServiceCreateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -212,14 +212,14 @@ export class AuthServiceCreateComponent implements OnInit {
   }
 
   private async _filter(name: string): Promise<void> {
-    const params = {firstNameCorporateName: name, status: 1};
+    const params = { firstNameCorporateName: name, status: 1 };
     this.filteredCollaborators = await this.collaboratorProvider.findByName(
       params
     );
   }
 
   private async _filterProfile(name: string): Promise<void> {
-    const params = {firstName: name, status: 1};
+    const params = { firstName: name, status: 1 };
     this.filteredProfiles = await this.profileProvider.findByName(params);
   }
 
@@ -307,6 +307,11 @@ export class AuthServiceCreateComponent implements OnInit {
 
   next() {
     this.onChange.next(true);
+  }
+
+  close() {
+    this.dialogRef.close();
+    sessionStorage.clear;
   }
 }
 function autocompleteObjectValidator(): ValidatorFn {

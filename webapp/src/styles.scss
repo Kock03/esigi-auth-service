@@ -106,6 +106,24 @@ html {
     }
 }
 
+th{
+  font-size: 16px !important;
+}
+
+.mat-option:hover{
+    background: #D0E7EF !important;
+  }
+  
+  .mat-selected{
+    background: #D0E7EF !important;
+  }
+  
+  .mat-row:hover{
+    background: #D0E7EF !important;
+  }
+  
+
+
 .confirm-modal {
     mat-dialog-container {
         min-width: 300px;

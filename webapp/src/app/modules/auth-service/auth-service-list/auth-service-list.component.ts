@@ -38,7 +38,7 @@ export class AuthServiceListComponent implements OnInit {
     private userProvider: UserProvider,
     private dialogService: ConfirmDialogService,
     public dialog: MatDialog
-  ) {}
+  ) { }
 
   async ngOnInit(): Promise<void> {
     await this.getUserList();
@@ -88,8 +88,8 @@ export class AuthServiceListComponent implements OnInit {
 
   openDialog() {
     const dialogRef = this.dialog.open(AuthServiceCreateComponent, {
-      width: '700px',
-      height: '550px',
+      width: '800px',
+      height: '490px',
     });
     dialogRef.afterClosed().subscribe((permission) => {
       if (permission) {

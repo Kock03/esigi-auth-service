@@ -2,7 +2,7 @@
     <h3 matDialogTitle>{{ titleMessage }}</h3>
     <p>{{ subtitleMessage }}</p>
   </div>
-  <div mat-dialog-actions fxLayoutAlign="end end">
+  <div mat-dialog-actions class="button-confirm">
     <button mat-flat-button class="delete" (click)="dialogRef.close(false)">
       Cancelar
     </button>
@@ -10,4 +10,5 @@
       Deletar
     </button>
   </div>
+
   

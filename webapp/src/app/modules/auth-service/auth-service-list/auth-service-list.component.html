@@ -61,23 +61,12 @@
           {{ "auth-service-list.filter.active" | translate }}
         </th>
         <td mat-cell class="information" *matCellDef="let user">
-          <div [ngStyle]="
-              user.inactive == 1
-              ? {
-                'background-image': 'url(../assets/icons/toggle3-red.png);',
-                  'max-width': '70px;',
-                  height: '40px;',
-                  'text-align': 'center'
-                }
-              : {
-                'background-image': 'url(../assets/icons/toggle3-green.png);',
-                  'max-width': '70px;',
-                  height: '40px;',
-                  'text-align': 'center'
-                }
-            ">
-
-          </div>
+          <button
+            disabled
+            [ngClass]="user.inactive == 1 ? 'inactive' : 'active'"
+            mat-button>
+            {{ user.inactive == 1 ? 'Inativo' : 'Ativo' }}
+          </button>
         </td>
       </ng-container>
       <hr size="10" width="50%" align="center" noshade />

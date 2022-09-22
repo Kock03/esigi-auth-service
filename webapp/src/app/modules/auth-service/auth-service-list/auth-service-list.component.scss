@@ -21,9 +21,8 @@
 
     .information span {
         font-size: 15px;
-        font-style: bold !important;
+       
     }
-
 
     .permissions span {
         font-size: 15px;
@@ -58,6 +57,23 @@
     td {
         padding-bottom: 10px;
     }
+
+
+    .active {
+        width: 100%;
+        max-width: 100px;
+        background: #4cdb72;
+        border-radius: 10px;
+        color: #fff;
+      }
+    
+      .inactive {
+        width: 100%;
+        max-width: 100px;
+        background: #8a9398;
+        border-radius: 10px;
+        color: #fff;
+      }
 
 
 }

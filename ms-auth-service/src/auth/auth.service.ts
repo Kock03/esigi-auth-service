@@ -10,7 +10,7 @@ export class AuthService {
   constructor(
     private readonly userService: UsersService,
     private readonly jwtService: JwtService,
-  ) { }
+  ) {}
 
   async validateUser(login: string, password: string) {
     let user: UsersEntity;
@@ -32,11 +32,18 @@ export class AuthService {
       token: this.jwtService.sign(payload),
     };
   }
-
+  
   verifyToken(jwt: any) {
-    const verify = this.jwtService.verify(jwt);
-    if (verify) {
-      return true;
-    }
+    const verifyToken = this.jwtService.verify(jwt, {
+      secret: process.env.JWT_SECRET_KEY,
+    });
+    return verifyToken ? true : false;
+  }
+
+  decodeToken(jwt: any) {
+    const verifyToken = this.jwtService.verify(jwt, {
+      secret: process.env.JWT_SECRET_KEY,
+    });
+    return verifyToken ?? null;
   }
 }

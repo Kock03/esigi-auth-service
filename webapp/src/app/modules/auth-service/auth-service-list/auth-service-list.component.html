@@ -32,7 +32,7 @@
     <table mat-table [dataSource]="filteredUserList" class="table">
       <ng-container matColumnDef="collaborator">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by collaborator"
-          fxLayout="center" style="margin-top: 17px; margin-left: 50px">
+          style="margin-top: 17px; margin-left: 50px">
           {{ "auth-service-list.user" | translate }}
         </th>
         <br />
@@ -56,15 +56,12 @@
       </ng-container>
 
       <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status" fxLayout="center"
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by status"
           style="margin-top: 17px; margin-left: 10px">
           {{ "auth-service-list.filter.active" | translate }}
         </th>
         <td mat-cell class="information" *matCellDef="let user">
-          <button
-            disabled
-            [ngClass]="user.inactive == 1 ? 'inactive' : 'active'"
-            mat-button>
+          <button disabled [ngClass]="user.inactive == 1 ? 'inactive' : 'active'" mat-button>
             {{ user.inactive == 1 ? 'Inativo' : 'Ativo' }}
           </button>
         </td>

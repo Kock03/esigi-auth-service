@@ -2,7 +2,13 @@ import { UpdateUserDto } from './dto/update-user-dto';
 import { CreateUserDto } from './dto/create-user-dto';
 import { HttpService, Injectable, NotFoundException } from '@nestjs/common';
 import { hashSync } from 'bcrypt';
-import { FindConditions, FindManyOptions, FindOneOptions, Repository } from 'typeorm';
+import {
+  FindConditions,
+  FindManyOptions,
+  FindOneOptions,
+  Repository,
+  Like,
+} from 'typeorm';
 import { UsersEntity } from './users.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { SendGridService } from '@anchan828/nest-sendgrid';
@@ -16,71 +22,30 @@ export class UsersService {
     private httpService: HttpService,
   ) { }
 
-
   async findAll() {
     const options: FindManyOptions = {
       order: { createdAt: 'DESC' },
+      select: [
+        'id',
+        'firstName',
+        'lastName',
+        'email',
+        'collaboratorId',
+        'login',
+        'office',
+        'inactive',
+        'profileId',
+        'profileName',
+      ],
     };
     try {
       const users = await this.usersRepository.find(options);
 
-      const collaboratorIdList = users.map((user) => {
-        return user.collaboratorId;
-      });
-
-      const collaborators = await this.httpService
-        .post('http://localhost:3501/api/v1/collaborators/list', {
-          idList: collaboratorIdList,
-        })
-        .toPromise();
-
-      if (collaborators.data) {
-        users.map((user) => {
-          const collaborator = collaborators.data.find(
-            (collaborator) => collaborator.id === user.collaboratorId);
-          user.collaborator = {
-            firstNameCorporateName: collaborator.firstNameCorporateName,
-            lastNameFantasyName: collaborator.lastNameFantasyName,
-            office: collaborator.office,
-            login: collaborator.login,
-            inactive: collaborator.inactive,
-          };
-          return user;
-        })
-      }
-      const profileIdList = users.map((user) => {
-        return user.profileId;
-      });
-      const profiles = await this.httpService
-        .post('http://localhost:3507/api/v1/profiles/list', {
-          idList: profileIdList,
-        })
-        .toPromise();
-
-      if (profiles.data) {
-        users.map((user) => {
-          if (user.profileId != undefined) {
-            const profileFind = profiles.data.find(
-              (profile) => profile.id === user.profileId);
-            user.profile = {
-              name: profileFind.name
-            };
-            return user;
-          } else {
-            return user;
-          }
-
-        })
-      } else {
-        return users;
-      }
       return users;
     } catch (error) {
       throw new NotFoundException();
     }
   }
-
-
 
   async findOneOrFail(
     conditions: FindConditions<UsersEntity>,
@@ -93,29 +58,29 @@ export class UsersService {
     }
   }
 
-
   async store(data: CreateUserDto) {
-    const passwordd = data.password
+    const passwordd = data.password;
     const user = this.usersRepository.create(data);
     await this.sendEmail(user.email, passwordd, user.login);
     return await this.usersRepository.save(user);
   }
 
   async findForCollaborator(collaborator) {
-    return await this.usersRepository
-      .find({
-        select: ['id', 'login'],
-        where:
-          { collaboratorId: collaborator },
-      });
-
+    return await this.usersRepository.find({
+      select: ['id', 'login'],
+      where: { collaboratorId: collaborator },
+    });
   }
 
-  async sendEmail(email: string, password: string, login: string): Promise<void> {
-    await this.sendGrid.send({
+  async sendEmail(
+    email: string,
+    password: string,
+    login: string,
+  ) {
+    return await this.sendGrid.send({
       to: email,
       from: process.env.FROM_EMAIL,
-      subject: "Informações do login",
+      subject: 'Informações do login',
       text: `Seus dados de acesso são: Login${login} e senha ${password}@envolti.com.br`,
       html: `<div><h1><strong>Bem Vindo a Envolti!</strong></h1></div>
             <div> <h2>Seus dados de acesso são: </h2></div>
@@ -139,5 +104,119 @@ export class UsersService {
   async destroy(id: string) {
     await this.usersRepository.findOneOrFail({ id });
     this.usersRepository.softDelete({ id });
+  }
+
+  async findActive() {
+    return await this.usersRepository.find({
+      select: [
+        'id',
+        'firstName',
+        'lastName',
+        'email',
+        'collaboratorId',
+        'login',
+        'office',
+        'inactive',
+        'profileId',
+        'profileName',
+      ],
+      where: [{ inactive: false }],
+    });
+  }
+
+  async findInactive() {
+    return await this.usersRepository.find({
+      select: [
+        'id',
+        'firstName',
+        'lastName',
+        'email',
+        'collaboratorId',
+        'login',
+        'office',
+        'inactive',
+        'profileId',
+        'profileName',
+      ],
+      where: [{ inactive: true }],
+    });
+  }
+
+  async findByName(firstName: string, status: number) {
+    let user;
+    if (firstName === '') {
+      switch (status) {
+        case 1:
+          user = this.findAll();
+          return user;
+          break;
+        case 2:
+          user = this.findActive();
+          return user;
+          break;
+        case 3:
+          user = this.findInactive();
+          return user;
+          break;
+      }
+    } else {
+      switch (status) {
+        case 1:
+          user = await this.usersRepository.find({
+            select: [
+              'id',
+              'firstName',
+              'lastName',
+              'email',
+              'collaboratorId',
+              'login',
+              'office',
+              'inactive',
+              'profileId',
+              'profileName',
+            ],
+            where: [{ firstName: Like(`%${firstName}%`) }],
+          });
+          return user;
+
+          break;
+        case 2:
+          user = await this.usersRepository.find({
+            select: [
+              'id',
+              'firstName',
+              'lastName',
+              'email',
+              'collaboratorId',
+              'login',
+              'office',
+              'inactive',
+              'profileId',
+              'profileName',
+            ],
+            where: [{ firstName: Like(`%${firstName}%`), inactive: false }],
+          });
+          return user;
+          break;
+        case 3:
+          user = await this.usersRepository.find({
+            select: [
+              'id',
+              'firstName',
+              'lastName',
+              'email',
+              'collaboratorId',
+              'login',
+              'office',
+              'inactive',
+              'profileId',
+              'profileName',
+            ],
+            where: [{ firstName: Like(`%${firstName}%`), inactive: true }],
+          });
+          return user;
+          break;
+      }
+    }
   }
 }

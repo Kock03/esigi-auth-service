@@ -1,34 +1,29 @@
-
-
 <mat-toolbar fxLayoutAlign="space-between center">
   <div fxLayout="row" >
     <img class="menu-button-logo" src="../assets/logo/logo-envolti-branca-roxo.png" alt="" />
     <button mat-button class="menu-button-logout" (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
-      <span>{{ "Logout" }}</span>
-    </button> 
-  </div>
-  <div>
-    <button
-      mat-icon-button
-      *ngIf="sidenav.mode === 'over'"
-      (click)="sidenav.toggle()">
+    </button>
+    <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
       <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
     </button>
   </div>
 </mat-toolbar>
 
-
 <mat-sidenav-container>
-  
-  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8" 
-  [ngStyle]="openTree && {'width': '100px'} || {'width': '250px'}">
-    <img *ngIf="openTree != true"
+  <mat-sidenav
+    #sidenav="matSidenav"
+    class="mat-elevation-z8"
+    [ngStyle]="(openTree && { width: '100px' }) || { width: '250px' }"
+  >
+    <img
+      *ngIf="openTree != true"
       class="avatar mat-elevation-z8"
-      src="../assets/icons/avatar-astronauta.png" />
+      src="../assets/icons/avatar-astronauta.png"
+    />
     <h2 *ngIf="openTree != true" class="name">Usuário</h2>
-    <p *ngIf="openTree != true"  class="designation">Função</p>
+    <p *ngIf="openTree != true" class="designation">Função</p>
 
     <mat-divider *ngIf="openTree != true"></mat-divider>
 

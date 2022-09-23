@@ -4,7 +4,7 @@
     .envolti-table {
         margin-top: 20px;
         overflow: auto;
-        max-height: 565px;
+        max-height: 645px;
         width: 100%;
         border-radius: 10px;
 
@@ -20,7 +20,12 @@
     }
 
     .information span {
-        font-size: 22px;
+        font-size: 15px;
+
+    }
+
+    .permissions span {
+        font-size: 15px;
     }
 
     .new-btn {
@@ -50,8 +55,24 @@
     }
 
     td {
-        padding-bottom: 20px;
-        border-bottom: 1px rgba(0, 0, 0, 0.75) solid;
+        padding-bottom: 10px;
+    }
+
+
+    .active {
+        width: 100%;
+        max-width: 100px;
+        background: #4cdb72;
+        border-radius: 10px;
+        color: #fff;
+    }
+
+    .inactive {
+        width: 100%;
+        max-width: 100px;
+        background: #8a9398;
+        border-radius: 10px;
+        color: #fff;
     }
 
 

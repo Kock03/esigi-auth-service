@@ -22,6 +22,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   collaboratorId: string;
 
+
   @IsNotEmpty()
   // @Matches(RegExHelper.password, {message: MessagesHelper.PASSWORD_INVALID})
   password: string;

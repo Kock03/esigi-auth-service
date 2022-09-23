@@ -1,5 +1,20 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
@@ -8,8 +23,6 @@ import { ProfileProvider } from 'src/providers/profile.provider';
 import { UserProvider } from 'src/providers/user.provider';
 import { RequireMatch } from 'src/services/autocomplete.service';
 import { SnackBarService } from 'src/services/snackbar.service';
-
-
 
 export interface ICollaborator {
   id: string;
@@ -30,24 +43,26 @@ export interface IPhone {
     phoneNumber: string;
     ddd: string;
   };
-
 }
 export interface IUser {
-  id: string
-  login: string,
+  id: string;
+  login: string;
 }
 
 @Component({
   selector: 'app-auth-service-create',
   templateUrl: './auth-service-create.component.html',
   styleUrls: ['./auth-service-create.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class AuthServiceCreateComponent implements OnInit {
   @Output() onChange: EventEmitter<any> = new EventEmitter();
 
-  show: boolean = false
-  collaboratorControl = new FormControl('', [Validators.required, RequireMatch]);
+  show: boolean = false;
+  collaboratorControl = new FormControl('', [
+    Validators.required,
+    RequireMatch,
+  ]);
   collaborator!: ICollaborator;
   collaborators!: ICollaborator[] | any[];
   collaboratorValid: boolean = false;
@@ -67,8 +82,7 @@ export class AuthServiceCreateComponent implements OnInit {
   userId!: any;
   dataUser: any;
   user!: IUser;
-  log!: any
-
+  log!: any;
 
   constructor(
     private fb: FormBuilder,
@@ -79,7 +93,6 @@ export class AuthServiceCreateComponent implements OnInit {
     private snackbarService: SnackBarService,
     public dialogRef: MatDialogRef<AuthServiceCreateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-
   ) { }
 
   ngOnInit(): void {
@@ -102,53 +115,52 @@ export class AuthServiceCreateComponent implements OnInit {
 
   async saveCollaborator() {
     let data = this.collaboratorProfileForm.getRawValue();
-    let id = data.profileId.id;
+    let profileId = data.profileId.id;
+    let profileName = data.profileName.name
     if (data.password === null) {
       try {
-        const user = await this.userProvider.update(
-          this.userId, { profileId: id }
-        );
+        const user = await this.userProvider.update(this.userId, {
+          profileId: profileId,
+          profileName: profileName,
+        });
         this.router.navigate(['autorizacao/lista']);
-        this.snackbarService.successMessage('Informações alteradas Com Sucesso');
-      }
-      catch (err) {
+        this.snackbarService.successMessage(
+          'Informações alteradas Com Sucesso'
+        );
+      } catch (err) {
         this.snackbarService.showError('Campos inválidos');
-        console.log(err)
+        console.log(err);
       }
-    } else if (id !== null) {
+    } else if (profileId !== null) {
       try {
-        const user = await this.userProvider.update(
-          this.userId, { password: data.password, profileId: id }
-        );
+        const user = await this.userProvider.update(this.userId, {
+          password: data.password,
+          profileId: profileId,
+          profileName: profileName
+        });
         this.router.navigate(['autorizacao/lista']);
-        this.snackbarService.successMessage('Informações alteradas Com Sucesso');
-      }
-      catch (err) {
+        this.snackbarService.successMessage(
+          'Informações alteradas Com Sucesso'
+        );
+      } catch (err) {
         this.snackbarService.showError('Campos inválidos');
-        console.log(err)
+        console.log(err);
       }
     } else {
       this.snackbarService.showError('Campos inválidos');
-
     }
-
   }
 
   //Essa função tem como objetivo subscrever o input de login, ele pega o res.id do collaboratorForm
-  // dentro do initForm, onde é feita a chamada do método, e passa o login direto no controlls setando o setValue 
+  // dentro do initForm, onde é feita a chamada do método, e passa o login direto no controlls setando o setValue
   // com o valor retornado do microserviço
   getUserId(collabotatorId: string) {
-
-    return this.userProvider.findOne(
-      collabotatorId
-    ).then((res: any) => {
-
+    return this.userProvider.findOne(collabotatorId).then((res: any) => {
       this.userId = res[0].id;
       this.log = res[0].login;
-      this.collaboratorProfileForm.controls['login'].setValue(this.log)
-      this.collaboratorProfileForm.controls['userId'].setValue(this.userId)
+      this.collaboratorProfileForm.controls['login'].setValue(this.log);
+      this.collaboratorProfileForm.controls['userId'].setValue(this.userId);
     });
-
   }
 
   passwordShow() {
@@ -181,7 +193,6 @@ export class AuthServiceCreateComponent implements OnInit {
       });
   }
 
-
   displayFn(user: any): string {
     if (typeof user === 'string' && this.collaborators) {
       return this.collaborators.find(
@@ -195,31 +206,26 @@ export class AuthServiceCreateComponent implements OnInit {
 
   displayFnProfile(user: any): string {
     if (typeof user === 'string' && this.profiles) {
-      return this.profiles.find(
-        (profile) => profile.id === user
-      );
+      return this.profiles.find((profile) => profile.id === user);
     }
-    return user && user.name ? user.name : '';
+    return user && user.firstName ? user.firstName : '';
   }
 
   private async _filter(name: string): Promise<void> {
-    const params = `firstNameCorporateName=${name}`;
+    const params = { firstNameCorporateName: name, status: 1 };
     this.filteredCollaborators = await this.collaboratorProvider.findByName(
       params
     );
   }
 
   private async _filterProfile(name: string): Promise<void> {
-    const params = `name=${name}`;
-    this.filteredProfiles = await this.profileProvider.findByName(
-      params
-    );
+    const params = { firstName: name, status: 1 };
+    this.filteredProfiles = await this.profileProvider.findByName(params);
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 
   initForm() {
     this.collaboratorProfileForm = this.fb.group({
@@ -229,18 +235,28 @@ export class AuthServiceCreateComponent implements OnInit {
       ddd: ['', Validators.required],
       profileId: [''],
       login: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(50)]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(50),
+        ],
+      ],
       userId: ['', Validators.required],
-
+      profileName: [''],
     });
 
     this.collaboratorControl.valueChanges.subscribe((res) => {
       if (res && res.id) {
-        this.getUserId(res.id)
+        this.getUserId(res.id);
 
-        this.collaboratorProfileForm.controls['collaboratorId'].setValue(res.id, {
-          emitEvent: true,
-        });
+        this.collaboratorProfileForm.controls['collaboratorId'].setValue(
+          res.id,
+          {
+            emitEvent: true,
+          }
+        );
 
         this.collaboratorProfileForm.controls['email'].setValue(res.email, {
           emitEvent: true,
@@ -248,7 +264,13 @@ export class AuthServiceCreateComponent implements OnInit {
         this.collaboratorProfileForm.controls['ddd'].setValue(res.Phone.ddd, {
           emitEvent: true,
         });
-        this.collaboratorProfileForm.controls['phoneNumber'].setValue(res.Phone.phoneNumber, {
+        this.collaboratorProfileForm.controls['phoneNumber'].setValue(
+          res.Phone.phoneNumber,
+          {
+            emitEvent: true,
+          }
+        );
+        this.collaboratorProfileForm.controls['login'].setValue(res.login, {
           emitEvent: true,
         });
       }
@@ -256,29 +278,42 @@ export class AuthServiceCreateComponent implements OnInit {
 
     this.profileControl.valueChanges.subscribe((res) => {
       if (res && res.id) {
-        this.collaboratorProfileForm.controls['profileId'].setValue({ id: res.id }, {
-          emitEvent: true,
-        });
+        this.collaboratorProfileForm.controls['profileName'].setValue(
+          { name: res.firstName },
+          {
+            emitEvent: true,
+          }
+        );
+
+        this.collaboratorProfileForm.controls['profileId'].setValue(
+          { id: res.id },
+          {
+            emitEvent: true,
+          }
+        );
+
         if (res.id !== '') {
           this.profileEmpty = false;
         }
       }
     });
 
-
-    if (this.profileValid = true) {
-      this.collaboratorProfileForm.controls['password'].removeValidators(Validators.required);
+    if ((this.profileValid = true)) {
+      this.collaboratorProfileForm.controls['password'].removeValidators(
+        Validators.required
+      );
     }
-
   }
-
 
   next() {
     this.onChange.next(true);
   }
 
+  close() {
+    this.dialogRef.close();
+    sessionStorage.clear;
+  }
 }
 function autocompleteObjectValidator(): ValidatorFn {
   throw new Error('Function not implemented.');
 }
-

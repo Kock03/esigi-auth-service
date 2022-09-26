@@ -280,7 +280,7 @@ export class ApiGateway {
       if (error.status == 401) {
         setTimeout(() => {
           localStorage.clear();
-          location.replace('');
+          location.replace(environment.portal);
         }, 2000);
       } else if (!excepetion.code) {
       } else {

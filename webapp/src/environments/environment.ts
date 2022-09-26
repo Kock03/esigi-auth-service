@@ -6,6 +6,7 @@ export const environment = {
   COLLABORATOR_MS: 'localhost:3501/api/v1/',
   AUTHORIZATION_MS: 'localhost:3507/api/v1/',
   AUTH_SERVICE_MS: 'localhost:3500/api/v1/',
+  portal: 'http://localhost:3406/login',
   production: false,
   message: 'LOCAL',
   protocol: 'http',

@@ -14,6 +14,7 @@ export class AuthController {
 
   @Get('validate')
   async validateToken(@Req() req: any) {
+    if(!req.headers.authorization) return false;
     try {
       console.log("🚀 ~ file: auth.controller.ts ~ line 17 ~ AuthController ~ validateToken ~ req", req)
       return await this.authService.verifyToken(req.headers.authorization);

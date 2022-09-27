@@ -1,14 +1,21 @@
 <mat-toolbar fxLayoutAlign="space-between center">
-  <div fxLayout="row" >
-    <img class="menu-button-logo" src="../assets/logo/logo-envolti-branca-roxo.png" alt="" />
-    <button mat-button class="menu-button-logout" (click)="logout()">
-      <mat-icon>exit_to_app</mat-icon>
-    </button>
-    <button mat-icon-button (click)="sidenav.toggle()">
-      <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
-      <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
-    </button>
-  </div>
+  <img class="menu-button-logo" src="../assets/logo/logo-envolti-branca-roxo.png" alt="" />
+  <button *ngIf="sidenav.mode !== 'over'" mat-button class="menu-button-logout" (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>
+    <span>{{ "Logout" }}</span>
+  </button> 
+
+<div *ngIf="sidenav.mode === 'over'">
+  <button mat-button class="menu-button-logout" (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>
+  </button> 
+  <button
+    mat-icon-button
+    (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+  </button>
+</div>
 </mat-toolbar>
 
 <mat-sidenav-container>

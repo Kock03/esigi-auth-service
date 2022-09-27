@@ -8,7 +8,7 @@ export class CreateUserDto {
   lastName: string;
 
   @IsNotEmpty()
-  inactive: string;
+  inactive: boolean;
 
   @IsNotEmpty()
   email: string;

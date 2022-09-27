@@ -8,6 +8,9 @@ export class CreateUserDto {
   lastName: string;
 
   @IsNotEmpty()
+  inactive: string;
+
+  @IsNotEmpty()
   email: string;
 
   @IsNotEmpty()
@@ -15,9 +18,6 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   office: string;
-
-  @IsNotEmpty()
-  inactive: boolean;
 
   @IsNotEmpty()
   collaboratorId: string;

@@ -19,7 +19,7 @@ export class AppComponent {
 
   openTree: boolean = false;
   compare!: any
-  autorizacao: string = 'autorizacao'
+  autorization: string = 'autorizacao'
 
 
   collaboratorId!: string | null;
@@ -70,7 +70,7 @@ export class AppComponent {
 
   navigator(route: any) {
     switch (route) {
-      case 'autorizacao':
+      case 'autorization':
         this.router.navigate(['autorizacao/lista']);
         break;
     }
@@ -80,8 +80,8 @@ export class AppComponent {
     this.router.navigate([route]);
   }
 
-  openApp(): void {
-    location.replace(`http://192.168.8.184:3406/portal`);
+  openApp(port: number): void {
+    location.replace(`http://localhost:${port}`);
   }
 
   logout(): void {

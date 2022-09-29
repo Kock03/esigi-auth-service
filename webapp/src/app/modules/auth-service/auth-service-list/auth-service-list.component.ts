@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -13,6 +13,7 @@ import { AuthServiceCreateComponent } from '../auth-service-create/auth-service-
   selector: 'app-auth-service-list',
   templateUrl: './auth-service-list.component.html',
   styleUrls: ['./auth-service-list.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AuthServiceListComponent implements OnInit {
   filteredCollaboratorList = new MatTableDataSource();
@@ -100,5 +101,9 @@ export class AuthServiceListComponent implements OnInit {
 
   async getUserList() {
     this.filteredUserList = this.users = await this.userProvider.findAll();
+  }
+
+  goHome(port: number): void {
+    location.replace(`http://localhost:${port}/portal`);
   }
 }

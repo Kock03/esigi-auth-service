@@ -62,7 +62,7 @@ export class UsersController {
     return await this.usersService.findActive();
   }
 
-  
+
   @Get('list/inactive')
   async findInactive() {
     return await this.usersService.findInactive();

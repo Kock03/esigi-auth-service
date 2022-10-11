@@ -44,7 +44,7 @@ export class AppComponent {
       .subscribe((res: any) => {
         let valid = res.url.indexOf('validate');
         if (valid === -1) {
-        this.token = localStorage.getItem('token')!;
+          this.token = localStorage.getItem('token')!;
           if (!this.token) {
             location.replace(environment.portal);
           }
@@ -90,7 +90,7 @@ export class AppComponent {
   }
 
   openApp(port: number): void {
-    location.replace(`http://localhost:${port}/validate/${this.token}`);
+    location.replace(environment.port + `${port}/validate/${this.token}`);
   }
 
   logout(): void {

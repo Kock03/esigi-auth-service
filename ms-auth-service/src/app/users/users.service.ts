@@ -24,7 +24,7 @@ export class UsersService {
 
   async findAll() {
     const options: FindManyOptions = {
-      order: { createdAt: 'DESC' },
+      order: { firstName: 'ASC' },
       select: [
         'id',
         'firstName',

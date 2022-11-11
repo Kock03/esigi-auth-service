@@ -46,7 +46,7 @@ export class AppComponent {
         if (valid === -1) {
           this.token = localStorage.getItem('token')!;
           if (!this.token) {
-            location.replace(environment.portal);
+            location.replace("http://192.168.8.184:3400/autorizacao/lista");
           }
         }
         this.activeMenu = res.url.split('/')[1];

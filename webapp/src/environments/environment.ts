@@ -3,11 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  COLLABORATOR_MS: 'localhost:3501/api/v1/',
-  AUTHORIZATION_MS: 'localhost:3507/api/v1/',
-  AUTH_SERVICE_MS: 'localhost:3500/api/v1/',
-  portal: 'http://localhost:3406/login',
-  port: 'http://localhost:',
+  COLLABORATOR_MS: '44.198.33.18:3501/api/v1/',
+  AUTHORIZATION_MS: '44.198.33.18:3507/api/v1/',
+  AUTH_SERVICE_MS: '44.198.33.18:3500/api/v1/',
+  portal: 'http://44.198.33.18:3406/login',
+  port: 'http://44.198.33.18:',
   production: false,
   message: 'LOCAL',
   protocol: 'http',

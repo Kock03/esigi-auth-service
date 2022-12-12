@@ -17,7 +17,7 @@ export class ValidateTokenComponent implements OnInit {
     this.token = this.route.snapshot.paramMap.get('id')!;
 
     if (!this.token) {
-      location.replace("http://44.198.33.18:3400/autorizacao/lista");
+      location.replace("http://44.205.159.254:3400/autorizacao/lista");
 
     } else {
       localStorage.setItem('token', this.token);

@@ -46,7 +46,7 @@ export class AppComponent {
         if (valid === -1) {
           this.token = localStorage.getItem('token')!;
           if (!this.token) {
-            location.replace("http://44.198.33.18:3400/autorizacao/lista");
+            location.replace("http://44.205.159.254:3400/autorizacao/lista");
           }
         }
         this.activeMenu = res.url.split('/')[1];

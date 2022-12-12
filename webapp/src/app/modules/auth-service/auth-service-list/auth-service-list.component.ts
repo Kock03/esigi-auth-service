@@ -104,6 +104,6 @@ export class AuthServiceListComponent implements OnInit {
   }
 
   goHome(port: number): void {
-    location.replace(`http://44.198.33.18:${port}/portal`);
+    location.replace(`http://44.205.159.254:${port}/portal`);
   }
 }

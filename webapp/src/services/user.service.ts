@@ -22,7 +22,7 @@ export class UserService {
         // localStorage.removeItem('xsrfToken');
         this.loggedChanged.next(false);
         this.isLogged = false;
-        location.replace(`http://44.198.33.18:3406/portal`);
+        location.replace(`http://44.205.159.254:3406/portal`);
     }
 
     isUserLoggedIn(): Subject<boolean> {

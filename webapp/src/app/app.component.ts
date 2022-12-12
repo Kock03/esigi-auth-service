@@ -46,11 +46,12 @@ export class AppComponent {
         if (valid === -1) {
           this.token = localStorage.getItem('token')!;
           if (!this.token) {
-            location.replace("http://192.168.8.184:3400/autorizacao/lista");
+            location.replace("http://localhost:3406/login");
           }
         }
         this.activeMenu = res.url.split('/')[1];
-      });
+      }
+      );
   }
 
   viewEdit() {
@@ -90,6 +91,7 @@ export class AppComponent {
   }
 
   openApp(port: number): void {
+    this.token = localStorage.getItem('token')!;
     location.replace(environment.port + `${port}/validate/${this.token}`);
   }
 

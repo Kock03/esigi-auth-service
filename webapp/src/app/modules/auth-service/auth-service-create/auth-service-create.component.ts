@@ -57,6 +57,8 @@ export interface IUser {
 })
 export class AuthServiceCreateComponent implements OnInit {
   @Output() onChange: EventEmitter<any> = new EventEmitter();
+  @ViewChild('filter', { static: true }) filter!: ElementRef;
+  @ViewChild('fiilter', { static: true }) fiilter!: ElementRef;
 
   show: boolean = false;
   collaboratorControl = new FormControl('', [
@@ -317,3 +319,7 @@ export class AuthServiceCreateComponent implements OnInit {
 function autocompleteObjectValidator(): ValidatorFn {
   throw new Error('Function not implemented.');
 }
+function ViewChild(arg0: string, arg1: { static: boolean; }) {
+  throw new Error('Function not implemented.');
+}
+

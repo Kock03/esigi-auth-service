@@ -69,7 +69,7 @@
           <div fxFlex="100" fxLayoutGap="16px">
             <mat-form-field fxFlex="50" class="example-full-width" appearance="outline">
               <mat-label>{{ "auth-service-list.profile" | translate }}</mat-label>
-              <input type="text" placeholder="Perfil" aria-label="text" #filter matInput [matAutocomplete]="now"
+              <input type="text" placeholder="Perfil" aria-label="text" #fiilter matInput [matAutocomplete]="now"
                 [formControl]="profileControl" />
               <mat-error *ngIf="
             profileControl && profileControl.hasError('required')

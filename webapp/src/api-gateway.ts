@@ -280,13 +280,15 @@ export class ApiGateway {
       if (error.status == 403) {
         setTimeout(() => {
           localStorage.clear();
-          location.replace(environment.portal);
+          location.replace(`http://localhost:3400/autorizacao/lista`);
+
         }, 2000);
       } 
       if (error.status == 401) {
         setTimeout(() => {
           localStorage.clear();
-          location.replace(environment.portal);
+          location.replace(`http://localhost:3400/autorizacao/lista`);
+
         }, 2000);
       } else if (!excepetion.code) {
       } else {

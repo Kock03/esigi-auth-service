@@ -17,7 +17,7 @@ export class ValidateTokenComponent implements OnInit {
     this.token = this.route.snapshot.paramMap.get('id')!;
 
     if (!this.token) {
-      location.replace(environment.portal);
+      location.replace(`http://localhost:3400/autorizacao/lista`);
     } else {
       localStorage.setItem('token', this.token);
       this.router.navigate(['/autorizacao/lista']);

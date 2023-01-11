@@ -17,7 +17,7 @@ export class ValidateTokenComponent implements OnInit {
     this.token = this.route.snapshot.paramMap.get('id')!;
 
     if (!this.token) {
-      location.replace(`http://localhost:3400/autorizacao/lista`);
+      location.replace(`https://aws-amplify.d23px3zakxjmn2.amplifyapp.com/autorizacao/lista`);
     } else {
       localStorage.setItem('token', this.token);
       this.router.navigate(['/autorizacao/lista']);

@@ -103,7 +103,7 @@ export class AuthServiceListComponent implements OnInit {
     this.filteredUserList = this.users = await this.userProvider.findAll();
   }
 
-  goHome(port: number): void {
-    location.replace(`http://localhost:${port}/portal`);
+  goHome() {
+    location.replace(`https://aws-amplify.d3tee2p1a2jxch.amplifyapp.com/portal`);
   }
 }

@@ -22,7 +22,7 @@ export class UserService {
         // localStorage.removeItem('xsrfToken');
         this.loggedChanged.next(false);
         this.isLogged = false;
-        location.replace(`http://localhost:3406/portal`);
+        location.replace(`https://aws-amplify.d3tee2p1a2jxch.amplifyapp.com/portal`);
     }
 
     isUserLoggedIn(): Subject<boolean> {

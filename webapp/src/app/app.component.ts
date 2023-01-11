@@ -46,7 +46,7 @@ export class AppComponent {
         if (valid === -1) {
           this.token = localStorage.getItem('token')!;
           if (!this.token) {
-            location.replace(`http://localhost:3400/autorizacao/lista`);
+            location.replace(`https://aws-amplify.d3tee2p1a2jxch.amplifyapp.com/login`);
 
           }
         }
@@ -90,8 +90,8 @@ export class AppComponent {
     this.router.navigate([route]);
   }
 
-  openApp(port: number): void {
-    location.replace(environment.port + `${port}/validate/${this.token}`);
+  openApp(){
+    location.replace(`https://aws-amplify.d3tee2p1a2jxch.amplifyapp.com/validate/${this.token}`);
   }
 
   logout(): void {

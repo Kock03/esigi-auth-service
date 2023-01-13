@@ -6,7 +6,7 @@ export const environment = {
   port: 'https://aws-amplify.d3tee2p1a2jxch.amplifyapp.com:',
   production: false,
   message: 'LOCAL',
-  protocol: 'http',
+  protocol: 'https',
 
 };
 

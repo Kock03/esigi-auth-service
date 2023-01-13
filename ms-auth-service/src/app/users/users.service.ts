@@ -40,6 +40,7 @@ export class UsersService {
     };
     try {
       const users = await this.usersRepository.find(options);
+      console.log("🚀 ~ file: users.service.ts:43 ~ UsersService ~ findAll ~ users", users)
 
       return users;
     } catch (error) {

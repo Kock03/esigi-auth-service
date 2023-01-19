@@ -17,7 +17,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 @UseGuards(AuthGuard('jwt'))
-@Controller('api/v1/users')
+@Controller('auth/api/v1/users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
 

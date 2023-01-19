@@ -162,7 +162,7 @@ export class ApiGateway {
 
     let requestOptions = {
       method: options.method,
-      url: `${environment.protocol}://${options.url}`,
+      url: `${options.url}`,
       headers: options.headers,
       search: this.buildUrlSearchParams(options.params),
       body: JSON.stringify(options.data),
@@ -266,7 +266,7 @@ export class ApiGateway {
       }
       return '';
     });
-    options.url = options.url.replace(/\/{2,}/g, '/');
+    // options.url = options.url.replace(/\/{2,}/g, '/');
 
     return options;
   }

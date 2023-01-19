@@ -46,7 +46,7 @@ export class AppComponent {
         if (valid === -1) {
           this.token = localStorage.getItem('token')!;
           if (!this.token) {
-            location.replace(`https://aws-amplify.d3tee2p1a2jxch.amplifyapp.com/login`);
+            // location.replace(`https://aws-amplify.d3tee2p1a2jxch.amplifyapp.com/login`);
 
           }
         }
